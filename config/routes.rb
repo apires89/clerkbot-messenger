@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 resources :rooms
 resources :activities
 resources :bookings
-resources :hostel
+resources :hostels
 
   devise_for :users
   root to: 'pages#home'
