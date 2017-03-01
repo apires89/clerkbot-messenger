@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227143632) do
+ActiveRecord::Schema.define(version: 20170301145227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20170227143632) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["hostel_id"], name: "index_activities_on_hostel_id", using: :btree
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "intent_id"
+    t.string   "photo"
+    t.string   "type"
+    t.text     "message"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["intent_id"], name: "index_answers_on_intent_id", using: :btree
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -46,6 +57,15 @@ ActiveRecord::Schema.define(version: 20170227143632) do
     t.text     "information"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "intents", force: :cascade do |t|
+    t.integer  "intent_id"
+    t.string   "q_string"
+    t.string   "q_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["intent_id"], name: "index_intents_on_intent_id", using: :btree
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -76,7 +96,9 @@ ActiveRecord::Schema.define(version: 20170227143632) do
   end
 
   add_foreign_key "activities", "hostels"
+  add_foreign_key "answers", "intents"
   add_foreign_key "bookings", "rooms"
   add_foreign_key "bookings", "users"
+  add_foreign_key "intents", "intents"
   add_foreign_key "rooms", "hostels"
 end
