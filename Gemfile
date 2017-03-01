@@ -17,6 +17,9 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 gem 'faker'
+gem 'facebook-messenger', "0.11.1"
+gem 'dotenv-rails'
+gem 'faraday'
 
 group :development, :test do
   gem 'binding_of_caller'
