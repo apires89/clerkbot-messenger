@@ -3,6 +3,7 @@ Facebook::Messenger.configure do |config|
   config.app_secret   = ENV["FB_APP_SECRET"]
   config.verify_token = ENV["FB_VERIFY_TOKEN"]
 end
+
 unless Rails.env.production?
   bot_files = Dir[Rails.root.join("app", "bot", "**", "*.rb")]
   bots_reloader = ActiveSupport::FileUpdateChecker.new(bot_files) do
