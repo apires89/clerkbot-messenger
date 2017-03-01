@@ -14,3 +14,4 @@ Bot.on :message do |message|
       text: "Hello #{user_name}. I AM CLERKBOT,pls make me work, im tired of repeating same shit over and over"
       })
 end
+
