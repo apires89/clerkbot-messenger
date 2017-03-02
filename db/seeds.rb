@@ -64,7 +64,7 @@ answer.save!
 
 4.times do |i|
 
-  intent = Intent.new(q_string: "Biking tour #{i}", q_key: 'biking_tour#{i}')
+  intent = Intent.new(q_string: "Biking tour #{i}", q_key: "biking_tour#{i}")
   intent.intent = info_intent
   intent.save!
   answer = CarouselItemAnswer.new(name: "Biking tour",
