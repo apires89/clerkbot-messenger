@@ -1,2 +1,57 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%= render 'shared/banner' %>
+
+<div class="home-container">
+  <div class="wrapper" id="wrapper1">
+    <div class="container text-center">
+      <div class="row margined-v">
+        <h1>What can I use ClerkBot for.</h1>
+      </div>
+      <div class="row justify-content-lg-center" id="icons-row">
+        <div class="col-lg-3">
+          <i class="home-icon fa fa-calendar-check-o"></i>
+          <p>Allow your customers to book directly through the messenger platform. With NO commissions charged.</p>
+        </div>
+        <div class="col-lg-3">
+          <i class="home-icon fa fa-arrow-circle-up"></i>
+          <p>Improve your results by promoting your services directly to your customers.</p>
+        </div>
+        <div class="col-lg-3">
+          <i class="home-icon fa fa-users"></i>
+          <p>Get more information about your customers. Including pictures, likes and contacts.</p>
+        </div>
+        <div class="col-lg-3">
+          <i class="home-icon fa fa-map-marker"></i>
+          <p>Provide relevant information about your property using external online services, such as GMaps for directions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper" id="wrapper2">
+    <div class="container">
+    <div class="row">
+      <h1>Personalize it with images and custom texts.</h1>
+    </div>
+    <div class="row justify-content-center" id="phonerow">
+      <div class="col-lg-5">
+        <%= image_tag "phone.png", class: "home-phone pull-right" %>
+      </div>
+      <div class="col-lg-4">
+        <div class="lis-inlinepull-left">
+        <ul class="list-inline">
+        <br>
+          <p><i class="fa fa-pencil"></i> <strong>You choose</strong></p>
+          <p>How to develop your bots using your own texts.</p>
+        </ul><br>
+        <ul class="list-inline">
+          <p><i class="fa fa-user-o"></i> <strong>Your service philosophy</strong></p>
+          <p>Adapt it to the character and image of your organization.</p>
+        </ul><br>
+        <ul class="list-inline">
+          <p><i class="fa fa-adjust"></i> <strong>Shape it</strong></p>
+          <p>To be more or less formal according to your target market.</p>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

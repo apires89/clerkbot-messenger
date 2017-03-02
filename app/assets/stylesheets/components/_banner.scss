@@ -1,0 +1,88 @@
+.home-banner {
+  position: absolute;
+  top: 0px;
+  height: 600px;
+  /* if you have a 70px navbar => height: calc(100vh - 70px); */
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url("banner2.jpeg");;
+  z-index: -1;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+
+.home-banner-content {
+  height: calc(600px - 20px);
+  padding: 80px 0px 10px 0px;
+  display: flex;
+}
+
+.home-content-left {
+  text-align: right;
+  max-width: 300px;
+  width: 300px;
+}
+
+.home-content-right {
+  text-align: left;
+  max-width: 500px;
+  margin-right: 50px;
+  vertical-align: middle;
+  p {
+    font-size: 22px;
+    font-weight: 200;
+  }
+}
+
+.home-content-right-text {
+  width: 90%;
+}
+
+.home-banner-content-links {
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  a {
+    color: white;
+    font-weight: 200;
+    line-height: 2;
+    opacity: 0.6;
+    transition: opacity 1s;
+    font-family: $headings-font-family;
+  }
+  a:hover {
+    opacity: 1;
+  }
+}
+
+.home-banner-messenger-link {
+  width: 50px;
+}
+
+.home-banner-call-to-action {
+  width: 85%;
+}
+
+.home-banner-call-to-action-btn {
+  margin-left: 10px;
+  padding: 0 20px;
+  line-height: 2.5;
+  color: white;
+  font-size: 14px;
+  border: 2px solid white;
+  cursor: pointer;
+  font-weight: bolder;
+  border-radius: $border-radius-base;
+  width: 100%;
+  font-family: $headings-font-family;
+  font-size: 20px;
+}
+
+.home-banner-call-to-action-btn:hover {
+  color: white;
+}

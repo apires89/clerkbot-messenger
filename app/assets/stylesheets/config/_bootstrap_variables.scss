@@ -2,6 +2,7 @@
  * Bootstrap sass variable
  * (see http://getbootstrap.com/customize/#less-variables)
  * ------------------------------------- */
+@import 'variables';
 
 // General style
 $font-family-sans-serif:  $base-font;
@@ -12,14 +13,19 @@ $headings-font-family:    $header-font;
 
 // Semantic color scheme
 // => http://getbootstrap.com/customize/#colors
-$gray-base:       $gray;
-$brand-primary:   $blue;
-$brand-success:   $green;
-$brand-info:      $yellow;
-$brand-danger:    $red;
-$brand-warning:   $orange;
+$gray-base:               $gray;
+$brand-primary:           $brown;
+$brand-success:           $grayblue;
+$brand-info:              $yellow;
+$brand-danger:            $red;
+$brand-warning:           $orange;
+
+$lines:                   $lightgray;
+$text:                    $black;
+$messengerblue:           $blue;
+
 
 // Buttons / inputs radius
-$border-radius-base:  2px;
-$border-radius-large: 2px;
-$border-radius-small: 2px;
+$border-radius-base:       0px;
+$border-radius-large:      0px;
+$border-radius-small:      0px;

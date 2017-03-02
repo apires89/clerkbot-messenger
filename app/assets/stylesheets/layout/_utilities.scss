@@ -4,22 +4,96 @@
  * Feel free to change them and create your own
  * ------------------------------------- */
 
-// Paddings
+// Paddings and margins
 .padded {
-  padding-top: 5em;
-  padding-bottom: 5em;
+  padding: 20px;
 }
+
+.margined {
+  margin: 20px;
+}
+
+.padded-h {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.margined-h {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.padded-v {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.margined-v {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 
 // Backgrounds
 .bg-black {
-  background: #4a4a4a;
+  background: $black;
 }
-.bg-grey {
-  background: #aeaeae;
+.bg-gray {
+  background: $gray;
 }
 .bg-blue {
-  background: #00a3e1;
+  background: $brand-color;
 }
 .bg-dark-blue {
-  background: #3b5998;
+  background: $brand-success;
+}
+
+// Borders
+.bordered {
+  border: 1px solid $lines;
+}
+
+.bordered-b {
+  border-bottom: 1px solid $lines;
+}
+
+.bordered-t {
+  border-top: 1px solid $lines;
+}
+
+.bordered-l {
+  border-left: 1px solid $lines;
+}
+
+.bordered-r {
+  border-right: 1px solid $lines;
+}
+
+.bordered-v {
+  border-bottom: 1px solid $lines;
+  border-top: 1px solid $lines;
+}
+
+.bordered-h {
+  border-left: 1px solid $lines;
+  border-right: 1px solid $lines;
+}
+
+// Buttons
+
+.btn-default {
+  border: none;
+  background-color: $brand-color;
+  color: white;
+  width: 100%;
+  cursor: pointer;
+}
+
+.btn-default:hover {
+  background-color: $brand-success;
+  color: white;
+}
+
+.justify-content-center {
+  justify-content: center;
 }

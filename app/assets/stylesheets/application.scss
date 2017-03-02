@@ -13,3 +13,18 @@
 @import "components/index";
 @import "pages/index";
 @import "vendor/index";
+
+// Text CSS
+
+h1, h2, h3{
+  line-height: 1.4;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+p {
+  font-size: 18px;
+  font-weight: 200;
+}

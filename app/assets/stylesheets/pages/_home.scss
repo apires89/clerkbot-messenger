@@ -2,3 +2,42 @@
  * CSS code specific to home page
  * (margin/padding adjustments)
  * ------------------------------------- */
+.home-container {
+  position: absolute;
+  top: 600px;
+  width: 100%;
+}
+
+.home-icon {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+#icons-row {
+  margin-bottom: 40px;
+}
+
+#wrapper1 {
+  background-color: #F5F5F5;
+}
+
+#wrapper2 {
+  background-color: #1c1c1c;
+  min-height: 200px;
+  padding: 20px 0 40px 0;
+  p, h1 {
+    color: #F5F5F5;
+  }
+  p {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+}
+
+.home-phone {
+  height: 400px;
+}
+
+#phonerow {
+  height: 400px;
+}
