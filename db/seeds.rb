@@ -8,38 +8,72 @@
 
 Intent.destroy_all
 
-top = Intent.new(q_string: "root")
+top = Intent.new(q_string: "root", )
 top.save!
-answer = MiddleAnswer.new(name: "Root")
+answer = SimpleAnswer.new(message: "What about would you like to know?")
 answer.intent = top
 answer.save!
-3.times do |i|
-  child1 = Intent.new(q_string: "Child#{i}")
-  child1.intent = top
-  child1.save!
-  answer1 = MiddleAnswer.new(name: "Level1Child#{i}Answer")
-  answer1.intent = child1
-  answer1.save!
-  3.times do |j|
-    child2 = Intent.new( q_string: "Child#{i}Child#{j}")
-    child2.intent = child1
-    child2.save!
-    answer2 = MiddleAnswer.new(name: "Level2Child#{i}Child#{j}Answer")
-    answer2.intent = child2
-    answer2.save!
-    3.times do |x|
-      child3 = Intent.new(
-          q_string: "Child#{i}Child#{j}Child#{x}"
-        )
-      child3.intent = child2
-      child3.save!
-      answer3 = FinalAnswer.new(
-        name: Faker::StarWars.planet,
-        message: Faker::StarWars.quote,
-        photo: "https://www.yorkcountygov.com/_fileUploads/images/Slide23.JPG"
-        )
-      answer3.intent = child3
-      answer3.save!
-    end
-  end
+
+booking_intent = Intent.new(q_string: "Booking", q_key: 'booking')
+booking_intent.intent = top
+booking_intent.save!
+answer = SimpleAnswer.new(message: "Book now! (pipeline starts)")
+answer.intent = booking_intent
+answer.save!
+
+
+
+info_intent = Intent.new(q_string: "Info", q_key: 'info')
+info_intent.intent = top
+info_intent.save!
+answer = SimpleAnswer.new(message: "What would you like to get more info?")
+answer.intent = info_intent
+answer.save!
+
+intent = Intent.new(q_string: "Breakfast", q_key: 'breakfast')
+intent.intent = info_intent
+intent.save!
+answer = SimpleAnswer.new(message: "We have world class breakfast included in room price! Located in dining hall, first floor from 8am to 11am")
+answer.intent = intent
+answer.save!
+
+intent = Intent.new(q_string: "Bike rental", q_key: "bike_rental")
+intent.intent = info_intent
+intent.save!
+answer = SimpleAnswer.new(message: "You can rent bikes for low low prices, 20 per day! Ask reseption")
+answer.intent = intent
+answer.save!
+
+intent = Intent.new(q_string: "Laundry", q_key: "laundry")
+intent.intent = info_intent
+intent.save!
+answer = SimpleAnswer.new(message: "Leave clothes in designaded laundry basket on bed")
+answer.intent = intent
+answer.save!
+
+
+
+
+
+info_intent = Intent.new(q_string: "Activities", q_key: 'activities')
+info_intent.intent = top
+info_intent.save!
+answer = CarouselAnswer.new(message: "Here are our activities?")
+answer.intent = info_intent
+answer.save!
+
+4.times do |i|
+
+  intent = Intent.new(q_string: "Biking tour #{i}", q_key: 'biking_tour#{i}')
+  intent.intent = info_intent
+  intent.save!
+  answer = CarouselItemAnswer.new(name: "Biking tour",
+    photo: "http://cdn.snowkingmountain.com/wp-content/uploads/2015/10/biking-miles-of-pathways-in-jackson-hole-1024x683.jpg",
+    title: "Biking tour",
+    subtitle: "Nice biking",
+
+    )
+  answer.intent = intent
+  answer.save!
 end
+
