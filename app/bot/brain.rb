@@ -47,6 +47,8 @@ class Brain
 
   def process_postback
     @intent = Intent.find_by(q_key: payload) || Intent.first
+    user.intent = @intent
+    user.save
     send_messages
   end
 
@@ -73,7 +75,21 @@ class Brain
   private
 
   def process_text
-    @intent = Intent.first
+    @intent = user.intent
+    words = text.split
+    posible_intents = []
+    words.each do |word|
+      res = Intent.where("LOWER( q_string ) LIKE ?", "%#{word.downcase}%")
+      posible_intents += res
+    end
+    frequency = Hash.new(0)
+    posible_intents.each { |intent| frequency[intent] += 1 }
+    #byebug
+    if posible_intents.length == 0
+      @intent = Intent.find_by(q_key: 'root')
+    else
+      @intent = frequency.sort_by{|intent, f| -f}.first.first
+    end
     send_messages
   end
 
