@@ -1,5 +1,5 @@
 class Answer < ApplicationRecord
-  belongs_to :intent
+  has_one :intent
   def to_messages(userinfo = {})
     ret = make_messages
     if intent.intents.length > 0 && intent.answer.quik_replies

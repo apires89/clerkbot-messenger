@@ -8,72 +8,92 @@
 
 Intent.destroy_all
 
-top = Intent.new(q_string: "root", )
-top.save!
 answer = SimpleAnswer.new(message: "What about would you like to know?")
-answer.intent = top
 answer.save!
+top = Intent.new(q_string: "root", q_key: 'root')
+top.answer = answer
+top.save!
 
+
+
+answer = SimpleAnswer.new(message: "Book now! (pipeline starts)")
+answer.save!
 booking_intent = Intent.new(q_string: "Booking", q_key: 'booking')
 booking_intent.intent = top
+booking_intent.answer = answer
 booking_intent.save!
-answer = SimpleAnswer.new(message: "Book now! (pipeline starts)")
-answer.intent = booking_intent
+
+
+
+answer = SimpleAnswer.new(message: "What would you like to get more info?")
 answer.save!
-
-
-
 info_intent = Intent.new(q_string: "Info", q_key: 'info')
 info_intent.intent = top
+info_intent.answer = answer
 info_intent.save!
-answer = SimpleAnswer.new(message: "What would you like to get more info?")
-answer.intent = info_intent
+
+
+    answer = SimpleAnswer.new(message: "We have world class breakfast included in room price! Located in dining hall, first floor from 8am to 11am")
+    answer.save!
+    intent = Intent.new(q_string: "Breakfast", q_key: 'breakfast')
+    intent.intent = info_intent
+    intent.answer = answer
+    intent.save!
+
+
+    answer = SimpleAnswer.new(message: "You can rent bikes for low low prices, 20 per day! Ask reseption")
+    answer.save!
+    intent = Intent.new(q_string: "Bike rental", q_key: "bike_rental")
+    intent.intent = info_intent
+    intent.answer = answer
+    intent.save!
+
+
+    answer = SimpleAnswer.new(message: "Leave clothes in designaded laundry basket on bed")
+    answer.save!
+    intent = Intent.new(q_string: "Laundry", q_key: "laundry")
+    intent.intent = info_intent
+    intent.answer = answer
+    intent.save!
+
+
+answer = SimpleAnswer.new(message: "Whicth restauratn u want info on?")
 answer.save!
+info_intent = Intent.new(q_string: "Restaurants", q_key: 'restaurants')
+info_intent.intent = top
+info_intent.answer = answer
+info_intent.save!
+restaurant_names = ["Happy place", "Some place", "Old place"]
+3.times do |i|
+    answer = RestaurantAnswer.new(message: Faker::Lorem.paragraph,
+      name: restaurant_names[i],
+      url: "https://www.google.pt/"
+      )
+    answer.save!
+    intent = Intent.new(q_string: restaurant_names[i], q_key: restaurant_names[i].delete(' ').downcase)
+    intent.intent = info_intent
+    intent.answer = answer
+    intent.save!
+end
 
-intent = Intent.new(q_string: "Breakfast", q_key: 'breakfast')
-intent.intent = info_intent
-intent.save!
-answer = SimpleAnswer.new(message: "We have world class breakfast included in room price! Located in dining hall, first floor from 8am to 11am")
-answer.intent = intent
+answer = CarouselAnswer.new(message: "Here are our activities?")
 answer.save!
-
-intent = Intent.new(q_string: "Bike rental", q_key: "bike_rental")
-intent.intent = info_intent
-intent.save!
-answer = SimpleAnswer.new(message: "You can rent bikes for low low prices, 20 per day! Ask reseption")
-answer.intent = intent
-answer.save!
-
-intent = Intent.new(q_string: "Laundry", q_key: "laundry")
-intent.intent = info_intent
-intent.save!
-answer = SimpleAnswer.new(message: "Leave clothes in designaded laundry basket on bed")
-answer.intent = intent
-answer.save!
-
-
-
-
-
 info_intent = Intent.new(q_string: "Activities", q_key: 'activities')
 info_intent.intent = top
+info_intent.answer = answer
 info_intent.save!
-answer = CarouselAnswer.new(message: "Here are our activities?")
-answer.intent = info_intent
-answer.save!
 
 4.times do |i|
-
-  intent = Intent.new(q_string: "Biking tour #{i}", q_key: "biking_tour#{i}")
-  intent.intent = info_intent
-  intent.save!
   answer = CarouselItemAnswer.new(name: "Biking tour",
     photo: "http://cdn.snowkingmountain.com/wp-content/uploads/2015/10/biking-miles-of-pathways-in-jackson-hole-1024x683.jpg",
     title: "Biking tour",
     subtitle: "Nice biking",
 
     )
-  answer.intent = intent
   answer.save!
+  intent = Intent.new(q_string: "Biking tour #{i}", q_key: "biking_tour#{i}")
+  intent.intent = info_intent
+  intent.answer = answer
+  intent.save!
 end
 
