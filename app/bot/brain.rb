@@ -1,10 +1,16 @@
 require "facebook/messenger"
+require 'json'
+
+
 
 class Brain
   include Facebook::Messenger
 
   attr_reader :message, :postback, :payload
   attr_reader :sender, :text, :attachments
+
+  PersistentMenu.enable
+  Greetings.enable
 
   # message.id          # => 'mid.1457764197618:41d102a3e1ae206a38'
   # message.sender      # => { 'id' => '1008372609250235' }
@@ -78,7 +84,7 @@ class Brain
   end
 
   def send_messages
-    messages_out = @intent.answer.to_messages
+    messages_out = @intent.answer.to_messages(user)
     messages_out.each do |message_out|
       Bot.deliver({
         recipient: sender,
@@ -116,3 +122,7 @@ class Brain
     @user
   end
 end
+
+
+
+
