@@ -8,7 +8,8 @@
 
 Intent.destroy_all
 
-answer = SimpleAnswer.new(message: "What about would you like to know?")
+
+answer = SimpleAnswer.new(message: "Good to see you André! :) I can give you information about our Services, the city of Sintra or help you Book a night @ Moonhill!\n\n (Remember you can always type 'home' to receive this message again!)")
 answer.save!
 top = Intent.new(q_string: "root", q_key: 'root')
 top.answer = answer
@@ -25,18 +26,18 @@ booking_intent.save!
 
 
 
-answer = SimpleAnswer.new(message: "What would you like to get more info?")
+answer = SimpleAnswer.new(message: "Would you like to get general information about the hostel operations?")
 answer.save!
-info_intent = Intent.new(q_string: "Info", q_key: 'info')
-info_intent.intent = top
-info_intent.answer = answer
-info_intent.save!
+services_intent = Intent.new(q_string: "Services", q_key: 'services')
+services_intent.intent = top
+services_intent.answer = answer
+services_intent.save!
 
 
-    answer = SimpleAnswer.new(message: "We have world class breakfast included in room price! Located in dining hall, first floor from 8am to 11am")
+    answer = SimpleAnswer.new(message: "Find all useful information below:\n\nCheck-In: from 1PM.\nCheck-Out: until 11AM.\n24 hour working reception.\nBreakfast included in the rate.\nBreakfast from 7AM to 11AM.")
     answer.save!
-    intent = Intent.new(q_string: "Breakfast", q_key: 'breakfast')
-    intent.intent = info_intent
+    intent = Intent.new(q_string: "General Info", q_key: 'general_info')
+    intent.intent = services_intent
     intent.answer = answer
     intent.save!
 
@@ -44,7 +45,7 @@ info_intent.save!
     answer = SimpleAnswer.new(message: "You can rent bikes for low low prices, 20 per day! Ask reseption")
     answer.save!
     intent = Intent.new(q_string: "Bike rental", q_key: "bike_rental")
-    intent.intent = info_intent
+    intent.intent = services_intent
     intent.answer = answer
     intent.save!
 
@@ -52,17 +53,17 @@ info_intent.save!
     answer = SimpleAnswer.new(message: "Leave clothes in designaded laundry basket on bed")
     answer.save!
     intent = Intent.new(q_string: "Laundry", q_key: "laundry")
-    intent.intent = info_intent
+    intent.intent = services_intent
     intent.answer = answer
     intent.save!
 
 
-answer = SimpleAnswer.new(message: "Whicth restauratn u want info on?")
+answer = SimpleAnswer.new(message: "We have a restaurant in the hostel! Would you like to check other places?")
 answer.save!
-info_intent = Intent.new(q_string: "Restaurants", q_key: 'restaurants')
-info_intent.intent = top
-info_intent.answer = answer
-info_intent.save!
+eat_intent = Intent.new(q_string: "Restaurants", q_key: 'restaurants')
+eat_intent.intent = top
+eat_intent.answer = answer
+eat_intent.save!
 restaurant_names = ["Happy place", "Some place", "Old place"]
 3.times do |i|
     answer = RestaurantAnswer.new(message: Faker::Lorem.paragraph,
@@ -71,7 +72,7 @@ restaurant_names = ["Happy place", "Some place", "Old place"]
       )
     answer.save!
     intent = Intent.new(q_string: restaurant_names[i], q_key: restaurant_names[i].delete(' ').downcase)
-    intent.intent = info_intent
+    intent.intent = eat_intent
     intent.answer = answer
     intent.save!
 end

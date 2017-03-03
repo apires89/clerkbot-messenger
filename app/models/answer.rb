@@ -1,7 +1,7 @@
 class Answer < ApplicationRecord
   has_one :intent
-  def to_messages(userinfo = {})
-    ret = make_messages
+  def to_messages(user = nil)
+    ret = make_messages(user)
     if intent.intents.length > 0 && intent.answer.quik_replies
       quick_replies = intent.intents.map do |n|
         {
@@ -19,7 +19,7 @@ class Answer < ApplicationRecord
 
   private
 
-  def make_messages
+  def make_messages(user = nil)
     raise 'this method should be overriden and return message hash array'
   end
 end
