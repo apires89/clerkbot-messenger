@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302181735) do
+ActiveRecord::Schema.define(version: 20170303113920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20170302181735) do
   end
 
   create_table "answers", force: :cascade do |t|
-    t.integer  "intent_id"
     t.string   "photo"
     t.string   "type"
     t.text     "message"
@@ -40,7 +39,7 @@ ActiveRecord::Schema.define(version: 20170302181735) do
     t.string   "title"
     t.text     "subtitle"
     t.boolean  "quik_replies", default: true, null: false
-    t.index ["intent_id"], name: "index_answers_on_intent_id", using: :btree
+    t.string   "url"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -83,6 +82,8 @@ ActiveRecord::Schema.define(version: 20170302181735) do
     t.string   "q_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "answer_id"
+    t.index ["answer_id"], name: "index_intents_on_answer_id", using: :btree
     t.index ["intent_id"], name: "index_intents_on_intent_id", using: :btree
   end
 
@@ -123,9 +124,9 @@ ActiveRecord::Schema.define(version: 20170302181735) do
   end
 
   add_foreign_key "activities", "hostels"
-  add_foreign_key "answers", "intents"
   add_foreign_key "bookings", "rooms"
   add_foreign_key "bookings", "users"
+  add_foreign_key "intents", "answers"
   add_foreign_key "intents", "intents"
   add_foreign_key "rooms", "hostels"
 end
