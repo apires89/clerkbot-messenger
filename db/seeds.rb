@@ -9,7 +9,7 @@ FbUser.destroy_all
 Intent.destroy_all
 
 
-answer = SimpleAnswer.new(message: "Good to see you André! :) I can give you information about our Services, the city of Sintra or help you Book a night @ Moonhill!\n\n (Remember you can always type 'home' to receive this message again!)")
+answer = SimpleAnswer.new(message: "Good to see you! :) I can give you information about our Services, the city of Sintra or help you Book a night @ Moonhill!\n\n (Remember you can always type 'home' to receive this message again!)")
 answer.save!
 top = Intent.new(q_string: "root", q_key: 'root')
 top.answer = answer
