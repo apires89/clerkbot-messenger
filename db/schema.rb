@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303140510) do
+ActiveRecord::Schema.define(version: 20170305162302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20170303140510) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.integer  "fb_user_id"
+    t.index ["fb_user_id"], name: "index_bookings_on_fb_user_id", using: :btree
     t.index ["room_id"], name: "index_bookings_on_room_id", using: :btree
     t.index ["user_id"], name: "index_bookings_on_user_id", using: :btree
   end
@@ -62,11 +64,13 @@ ActiveRecord::Schema.define(version: 20170303140510) do
     t.string   "locale"
     t.float    "timezone"
     t.string   "gender"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "fb_id"
-    t.integer  "intent_id"
-    t.index ["intent_id"], name: "index_fb_users_on_intent_id", using: :btree
+    t.integer  "prev_intent_id"
+    t.integer  "next_intent_id"
+    t.index ["next_intent_id"], name: "index_fb_users_on_next_intent_id", using: :btree
+    t.index ["prev_intent_id"], name: "index_fb_users_on_prev_intent_id", using: :btree
   end
 
   create_table "hostels", force: :cascade do |t|
@@ -85,6 +89,8 @@ ActiveRecord::Schema.define(version: 20170303140510) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "answer_id"
+    t.string   "type"
+    t.string   "field"
     t.index ["answer_id"], name: "index_intents_on_answer_id", using: :btree
     t.index ["intent_id"], name: "index_intents_on_intent_id", using: :btree
   end
@@ -126,9 +132,9 @@ ActiveRecord::Schema.define(version: 20170303140510) do
   end
 
   add_foreign_key "activities", "hostels"
+  add_foreign_key "bookings", "fb_users"
   add_foreign_key "bookings", "rooms"
   add_foreign_key "bookings", "users"
-  add_foreign_key "fb_users", "intents"
   add_foreign_key "intents", "answers"
   add_foreign_key "intents", "intents"
   add_foreign_key "rooms", "hostels"

@@ -1,0 +1,2 @@
+class BookingIntent < Intent
+end

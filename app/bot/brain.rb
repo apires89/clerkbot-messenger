@@ -41,7 +41,10 @@ class Brain
   end
 
   def process_message
-    if message.messaging["message"]["quick_reply"].present?
+    #byebug
+    if user.prev_intent && user.prev_intent.type
+      process_pipeline
+    elsif message.messaging["message"]["quick_reply"].present?
       @payload = message.messaging["message"]["quick_reply"]["payload"]
       process_postback
     elsif text.present?
@@ -51,9 +54,20 @@ class Brain
     end
   end
 
+  def process_pipeline
+    if user.prev_intent.save_data(text, user)
+      @intent = user.prev_intent.intents.first
+      user.prev_intent = @intent
+      user.save
+      send_messages
+    else
+      send_error
+    end
+  end
+
   def process_postback
     @intent = Intent.find_by(q_key: payload) || Intent.first
-    user.intent = @intent
+    user.prev_intent = @intent
     user.save
     send_messages
   end
@@ -81,7 +95,7 @@ class Brain
   private
 
   def process_text
-    @intent = user.intent
+    @intent = user.prev_intent
     words = text.split
     posible_intents = []
     words.each do |word|
