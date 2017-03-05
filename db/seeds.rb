@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Booking.destroy_all
 FbUser.destroy_all
 Intent.destroy_all
 
@@ -16,15 +17,47 @@ top.answer = answer
 top.save!
 
 
-
-answer = SimpleAnswer.new(message: "Book now! (pipeline starts)")
+answer = SimpleAnswer.new(message: "To look for availible rooms we need some information from you, if you want to exit booking you can at any time click exit.")
 answer.save!
-booking_intent = Intent.new(q_string: "Booking", q_key: 'booking')
+booking_intent = BookingStartIntent.new(q_string: "Booking", q_key: 'booking')
 booking_intent.intent = top
 booking_intent.answer = answer
 booking_intent.save!
 
+answer = NoReplyAnswer.new(message: "Provide start date, format (dd mm yyyy)")
+answer.save!
+start_intent = BookingDateIntent.new(q_string: "Continue", q_key: 'booking_start_date', field: 'checkin')
+start_intent.intent = booking_intent
+start_intent.answer = answer
+start_intent.save!
 
+answer = NoReplyAnswer.new(message: "Provide end date, format (dd mm yyyy)")
+answer.save!
+end_intent = BookingDateIntent.new(q_string: "Continue", q_key: 'booking_end_date', field: 'checkout')
+end_intent.intent = start_intent
+end_intent.answer = answer
+end_intent.save!
+
+answer = CarouselAnswer.new(message: "Here are our available rooms!")
+answer.save!
+info_intent = Intent.new(q_string: "Available Rooms", q_key: 'available_rooms')
+info_intent.intent = end_intent
+info_intent.answer = answer
+info_intent.save!
+
+4.times do |i|
+  answer = CarouselItemAnswer.new(name: "Biking tour",
+    photo: "http://www.dusit.com/dusitthani/bangkok/wp-content/blogs.dir/12/files/rooms_superior-room/dtbk_accommodation_superior-room.jpg",
+    title: "Double room",
+    subtitle: "Nice room",
+
+    )
+  answer.save!
+  intent = Intent.new(q_string: "Double room #{i}", q_key: "room#{i}")
+  intent.intent = info_intent
+  intent.answer = answer
+  intent.save!
+end
 
 answer = SimpleAnswer.new(message: "Would you like to get general information about the hostel operations?")
 answer.save!
