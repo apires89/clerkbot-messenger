@@ -1,2 +1,0 @@
-class BookingIntent < Intent
-end

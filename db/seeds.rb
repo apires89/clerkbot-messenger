@@ -20,28 +20,28 @@ top.save!
 answer = SimpleAnswer.new(message: "To look for availible rooms we need some information from you, if you want to exit booking you can at any time click exit.")
 answer.save!
 booking_intent = BookingStartIntent.new(q_string: "Booking", q_key: 'booking')
-booking_intent.intent = top
+booking_intent.parent_intent = top
 booking_intent.answer = answer
 booking_intent.save!
 
 answer = NoReplyAnswer.new(message: "Provide start date, format (dd mm yyyy)")
 answer.save!
 start_intent = BookingDateIntent.new(q_string: "Continue", q_key: 'booking_start_date', field: 'checkin')
-start_intent.intent = booking_intent
+start_intent.parent_intent = booking_intent
 start_intent.answer = answer
 start_intent.save!
 
 answer = NoReplyAnswer.new(message: "Provide end date, format (dd mm yyyy)")
 answer.save!
 end_intent = BookingDateIntent.new(q_string: "Continue", q_key: 'booking_end_date', field: 'checkout')
-end_intent.intent = start_intent
+end_intent.parent_intent = start_intent
 end_intent.answer = answer
 end_intent.save!
 
 answer = CarouselAnswer.new(message: "Here are our available rooms!")
 answer.save!
 info_intent = Intent.new(q_string: "Available Rooms", q_key: 'available_rooms')
-info_intent.intent = end_intent
+info_intent.parent_intent = end_intent
 info_intent.answer = answer
 info_intent.save!
 
@@ -54,7 +54,7 @@ info_intent.save!
     )
   answer.save!
   intent = Intent.new(q_string: "Double room #{i}", q_key: "room#{i}")
-  intent.intent = info_intent
+  intent.parent_intent = info_intent
   intent.answer = answer
   intent.save!
 end
@@ -62,7 +62,7 @@ end
 answer = SimpleAnswer.new(message: "Would you like to get general information about the hostel operations?")
 answer.save!
 services_intent = Intent.new(q_string: "Services", q_key: 'services')
-services_intent.intent = top
+services_intent.parent_intent = top
 services_intent.answer = answer
 services_intent.save!
 
@@ -70,7 +70,7 @@ services_intent.save!
     answer = SimpleAnswer.new(message: "Find all useful information below:\n\nCheck-In: from 1PM.\nCheck-Out: until 11AM.\n24 hour working reception.\nBreakfast included in the rate.\nBreakfast from 7AM to 11AM.")
     answer.save!
     intent = Intent.new(q_string: "General Info", q_key: 'general_info')
-    intent.intent = services_intent
+    intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
 
@@ -78,7 +78,7 @@ services_intent.save!
     answer = SimpleAnswer.new(message: "You can rent bikes for low low prices, 20 per day! Ask reseption")
     answer.save!
     intent = Intent.new(q_string: "Bike rental", q_key: "bike_rental")
-    intent.intent = services_intent
+    intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
 
@@ -86,7 +86,7 @@ services_intent.save!
     answer = SimpleAnswer.new(message: "Leave clothes in designaded laundry basket on bed")
     answer.save!
     intent = Intent.new(q_string: "Laundry", q_key: "laundry")
-    intent.intent = services_intent
+    intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
 
@@ -94,7 +94,7 @@ services_intent.save!
 answer = SimpleAnswer.new(message: "We have a restaurant in the hostel! Would you like to check other places?")
 answer.save!
 eat_intent = Intent.new(q_string: "Restaurants", q_key: 'restaurants')
-eat_intent.intent = top
+eat_intent.parent_intent = top
 eat_intent.answer = answer
 eat_intent.save!
 restaurant_names = ["Happy place", "Some place", "Old place"]
@@ -105,7 +105,7 @@ restaurant_names = ["Happy place", "Some place", "Old place"]
       )
     answer.save!
     intent = Intent.new(q_string: restaurant_names[i], q_key: restaurant_names[i].delete(' ').downcase)
-    intent.intent = eat_intent
+    intent.parent_intent = eat_intent
     intent.answer = answer
     intent.save!
 end
@@ -113,7 +113,7 @@ end
 answer = CarouselAnswer.new(message: "Here are our activities?")
 answer.save!
 info_intent = Intent.new(q_string: "Activities", q_key: 'activities')
-info_intent.intent = top
+info_intent.parent_intent = top
 info_intent.answer = answer
 info_intent.save!
 
@@ -126,7 +126,7 @@ info_intent.save!
     )
   answer.save!
   intent = Intent.new(q_string: "Biking tour #{i}", q_key: "biking_tour#{i}")
-  intent.intent = info_intent
+  intent.parent_intent = info_intent
   intent.answer = answer
   intent.save!
 end
