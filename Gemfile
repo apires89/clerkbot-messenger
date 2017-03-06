@@ -19,6 +19,10 @@ gem 'faker'
 gem 'facebook-messenger', "0.8.0"
 gem 'dotenv-rails'
 gem 'faraday'
+gem 'cloudinary'
+gem 'attachinary', github: 'assembler/attachinary'
+gem 'jquery-fileupload-rails'
+gem 'coffee-rails'
 
 group :development, :test do
   gem 'binding_of_caller'
