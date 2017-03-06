@@ -244,6 +244,7 @@ DEPENDENCIES
   faker
   faraday
   font-awesome-sass
+  httparty
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails

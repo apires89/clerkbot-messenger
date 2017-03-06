@@ -64,11 +64,26 @@ class Brain
     end
   end
 
+  def process_postback_pipeline
+    if user.prev_intent.process_data(data: payload, user: user)
+      @intent = user.prev_intent.child_intents.first
+      user.prev_intent = @intent
+      user.save
+      send_messages
+    else
+      send_error
+    end
+  end
+
   def process_postback
-    @intent = Intent.find_by(q_key: payload) || Intent.first
-    user.prev_intent = @intent
-    user.save
-    send_messages
+    if user.prev_intent && user.prev_intent.is_pipeline
+      process_postback_pipeline
+    else
+      @intent = Intent.find_by(q_key: payload) || Intent.first
+      user.prev_intent = @intent
+      user.save
+      send_messages
+    end
   end
 
 
