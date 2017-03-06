@@ -19,6 +19,7 @@ gem 'faker'
 gem 'facebook-messenger', "0.8.0"
 gem 'dotenv-rails'
 gem 'faraday'
+gem 'httparty'
 
 group :development, :test do
   gem 'binding_of_caller'

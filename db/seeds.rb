@@ -142,11 +142,19 @@ location_intent.save!
 search_keys = ['restaurant', 'museum', 'atm']
 
 search_keys.each do |key|
-  answer = GoogleApiAnswer.new()
+  answer = GoogleApiCarouselAnswer.new(name: key, message: "Select to get details!")
   answer.save!
-  location_intent = Intent.new(q_string: "Near by places", q_key: 'places')
-  location_intent.parent_intent = top
-  location_intent.answer = answer
-  location_intent.save!
+  google_intent = GoogleApiSearchIntent.new(q_string: key.capitalize, q_key: "google_api_#{key}")
+  google_intent.parent_intent = location_intent
+  google_intent.answer = answer
+  google_intent.save!
+
+  answer = SimpleAnswer.new(message: "Success motherfkers!!!!!!!!!!")
+  answer.save!
+  intent = Intent.new(q_string: key.capitalize, q_key: "google_api_details_#{key}")
+  intent.parent_intent = google_intent
+  intent.answer = answer
+  intent.save!
+
 end
 

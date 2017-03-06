@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306113612) do
+ActiveRecord::Schema.define(version: 20170306164730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20170306113612) do
     t.string   "fb_id"
     t.integer  "prev_intent_id"
     t.integer  "next_intent_id"
+    t.string   "selection"
     t.index ["next_intent_id"], name: "index_fb_users_on_next_intent_id", using: :btree
     t.index ["prev_intent_id"], name: "index_fb_users_on_prev_intent_id", using: :btree
   end
