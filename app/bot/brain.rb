@@ -41,8 +41,7 @@ class Brain
   end
 
   def process_message
-    #byebug
-    if user.prev_intent && user.prev_intent.type
+    if user.prev_intent && user.prev_intent.is_pipeline
       process_pipeline
     elsif message.messaging["message"]["quick_reply"].present?
       @payload = message.messaging["message"]["quick_reply"]["payload"]
@@ -55,8 +54,8 @@ class Brain
   end
 
   def process_pipeline
-    if user.prev_intent.save_data(text, user)
-      @intent = user.prev_intent.intents.first
+    if user.prev_intent.process_data(data: text, user: user)
+      @intent = user.prev_intent.child_intents.first
       user.prev_intent = @intent
       user.save
       send_messages

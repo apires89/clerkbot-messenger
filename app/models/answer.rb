@@ -2,8 +2,8 @@ class Answer < ApplicationRecord
   has_one :intent
   def to_messages(user = nil)
     ret = make_messages(user)
-    if intent.intents.length > 0 && intent.answer.quik_replies
-      quick_replies = intent.intents.map do |n|
+    if intent.child_intents.length > 0 && intent.answer.quik_replies
+      quick_replies = intent.child_intents.map do |n|
         {
             content_type: 'text',
             title: n.q_string,

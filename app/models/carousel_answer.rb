@@ -14,7 +14,7 @@ class CarouselAnswer < Answer
       type: "template",
       payload: {
         template_type: "generic",
-        elements: intent.intents.map do |i|
+        elements: intent.child_intents.map do |i|
           i.answer.to_carousel_item
         end
       }

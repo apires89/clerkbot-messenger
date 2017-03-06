@@ -1,14 +1,13 @@
-class BookingDateIntent < BookingIntent
+class BookingDateIntent < PipelineIntent
   validates :field, presence: true
 
-  def save_data(date_string, user)
+  def process_data(params = {})
     begin
-      date = Date.parse(date_string.gsub(' ', '-'))
+      date = Date.parse(params[:data].gsub(' ', '-'))
     rescue
       return false
     end
-    user.booking.update_attribute(field.to_sym, date.to_s(:db))
-    user.booking.save
-    #byebug
+    params[:user].booking.update_attribute(field.to_sym, date.to_s(:db))
+    params[:user].booking.save
   end
 end
