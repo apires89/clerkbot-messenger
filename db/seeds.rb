@@ -53,13 +53,13 @@ info_intent.save!
 
     )
   answer.save!
-  intent = Intent.new(q_string: "Double room #{i}", q_key: "room#{i}")
+  intent = BookingRoomIntent.new(q_string: "Double room #{i}", q_key: "room#{i}", field: 'room')
   intent.parent_intent = info_intent
   intent.answer = answer
   intent.save!
 end
 
-answer = SimpleAnswer.new(message: "Would you like to get general information about the hostel operations?")
+answer = ComplexAnswer.new(message: "Would you like to get general information about the hostel operations?")
 answer.save!
 services_intent = Intent.new(q_string: "Services", q_key: 'services')
 services_intent.parent_intent = top
@@ -132,6 +132,7 @@ info_intent.save!
 end
 
 
+
 answer = SimpleAnswer.new(message: "Select what u want to search for")
 answer.save!
 location_intent = Intent.new(q_string: "Near by places", q_key: 'places')
@@ -157,4 +158,5 @@ search_keys.each do |key|
   intent.save!
 
 end
+
 
