@@ -131,3 +131,22 @@ info_intent.save!
   intent.save!
 end
 
+
+answer = SimpleAnswer.new(message: "Select what u want to search for")
+answer.save!
+location_intent = Intent.new(q_string: "Near by places", q_key: 'places')
+location_intent.parent_intent = top
+location_intent.answer = answer
+location_intent.save!
+
+search_keys = ['restaurant', 'museum', 'atm']
+
+search_keys.each do |key|
+  answer = GoogleApiAnswer.new()
+  answer.save!
+  location_intent = Intent.new(q_string: "Near by places", q_key: 'places')
+  location_intent.parent_intent = top
+  location_intent.answer = answer
+  location_intent.save!
+end
+
