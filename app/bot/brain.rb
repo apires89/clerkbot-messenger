@@ -41,11 +41,11 @@ class Brain
   end
 
   def process_message
-    if user.prev_intent && user.prev_intent.is_pipeline
-      process_pipeline
-    elsif message.messaging["message"]["quick_reply"].present?
+    if message.messaging["message"]["quick_reply"].present?
       @payload = message.messaging["message"]["quick_reply"]["payload"]
       process_postback
+    elsif text.present? && user.prev_intent && user.prev_intent.is_pipeline
+      process_pipeline
     elsif text.present?
       process_text
     else
@@ -60,7 +60,7 @@ class Brain
       user.save
       send_messages
     else
-      send_error
+      send_pipeline_error
     end
   end
 
@@ -71,19 +71,15 @@ class Brain
       user.save
       send_messages
     else
-      send_error
+      send_pipeline_error
     end
   end
 
   def process_postback
-    if user.prev_intent && user.prev_intent.is_pipeline
-      process_postback_pipeline
-    else
-      @intent = Intent.find_by(q_key: payload) || Intent.first
-      user.prev_intent = @intent
-      user.save
-      send_messages
-    end
+    @intent = Intent.find_by(q_key: payload) || Intent.first
+    user.prev_intent = @intent
+    user.save
+    send_messages
   end
 
 
@@ -113,18 +109,20 @@ class Brain
     words = text.split
     posible_intents = []
     words.each do |word|
-      res = Intent.where("LOWER( q_string ) LIKE ?", "%#{word.downcase}%")
-      posible_intents += res
+      if word.length > 2
+        res = Intent.search(word)
+        posible_intents += res
+      end
     end
     frequency = Hash.new(0)
     posible_intents.each { |intent| frequency[intent] += 1 }
     #byebug
     if posible_intents.length == 0
-      @intent = Intent.find_by(q_key: 'root')
+      send_error
     else
       @intent = frequency.sort_by{|intent, f| -f}.first.first
+      send_messages
     end
-    send_messages
   end
 
   def send_messages
@@ -137,11 +135,30 @@ class Brain
     end
   end
 
+  def send_pipeline_error
+    Bot.deliver(
+      recipient: sender,
+      message: {
+        text: "Sorry, didn't understand that.",
+        quick_replies: [{
+            content_type: 'text',
+            title: "Exit",
+            payload: 'root'
+        }]
+      }
+    )
+  end
+
   def send_error
     Bot.deliver(
       recipient: sender,
       message: {
-        text: "Sorry, didn't understand that."
+        text: "Sorry, didn't understand that. Try to refrase your question",
+        quick_replies: [{
+            content_type: 'text',
+            title: "Back to start",
+            payload: 'root'
+        }]
       }
     )
   end

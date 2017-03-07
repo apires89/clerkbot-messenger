@@ -65,7 +65,7 @@ available_rooms = [suite, double_room, family_room, dorm]
 
 answer = SimpleAnswer.new(message: "Good to see you! :) I can give you information about our Services, the city of Sintra or help you Book a night @ Moonhill!\n\n (Remember you can always type **home** to receive this message again!)")
 answer.save!
-top = Intent.new(q_string: "root", q_key: 'root')
+top = Intent.new(q_string: "Home", q_key: 'root')
 top.answer = answer
 top.save!
 
@@ -131,10 +131,30 @@ services_intent.save!
     # intent.answer = answer
     # intent.save!
 
-
-    answer = SimpleAnswer.new(message: "Here are our base services:\n\nCheck-In: from 1PM.\nCheck-Out: until 11AM.\n - 24 hour working reception.\n- Inhouse restaurant\nBreakfast from 7AM to 11AM.\n Guest kitchen.\n")
+    answer = SimpleAnswer.new(message: "Check-In: from 1PM.")
     answer.save!
-    intent = Intent.new(q_string: "Base", q_key: 'base_info')
+    intent = Intent.new(q_string: "Check In", q_key: 'check_in')
+    intent.parent_intent = services_intent
+    intent.answer = answer
+    intent.save!
+
+    answer = SimpleAnswer.new(message: "Check-Out: until 11AM.")
+    answer.save!
+    intent = Intent.new(q_string: "Check Out", q_key: "check_out")
+    intent.parent_intent = services_intent
+    intent.answer = answer
+    intent.save!
+
+    answer = SimpleAnswer.new(message: "24 hour working reception.")
+    answer.save!
+    intent = Intent.new(q_string: "Reseption", q_key: "reseption")
+    intent.parent_intent = services_intent
+    intent.answer = answer
+    intent.save!
+
+    answer = SimpleAnswer.new(message: "Breakfast included in the rate, from 7AM to 11AM.")
+    answer.save!
+    intent = Intent.new(q_string: "Breakfast", q_key: "breakfast")
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
@@ -255,23 +275,15 @@ location_intent.parent_intent = top
 location_intent.answer = answer
 location_intent.save!
 
-search_keys = ['restaurant', 'museum', 'atm']
+search_keys = ['museum', 'atm']
 
 search_keys.each do |key|
   answer = GoogleApiCarouselAnswer.new(name: key, message: "Select to get details!")
   answer.save!
-  google_intent = GoogleApiSearchIntent.new(q_string: key.capitalize, q_key: "google_api_#{key}")
+  google_intent = Intent.new(q_string: key.capitalize, q_key: "google_api_#{key}")
   google_intent.parent_intent = location_intent
   google_intent.answer = answer
   google_intent.save!
-
-  answer = SimpleAnswer.new(message: "Success motherfkers!!!!!!!!!!")
-  answer.save!
-  intent = Intent.new(q_string: key.capitalize, q_key: "google_api_details_#{key}")
-  intent.parent_intent = google_intent
-  intent.answer = answer
-  intent.save!
-
 end
 
 

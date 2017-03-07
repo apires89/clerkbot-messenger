@@ -25,7 +25,9 @@ gem 'cloudinary'
 gem 'attachinary', github: 'assembler/attachinary'
 gem 'jquery-fileupload-rails'
 gem 'coffee-rails'
-gem 'httparty'
+gem 'pg_search'
+gem 'google_places'
+
 
 group :development, :test do
   gem 'binding_of_caller'
