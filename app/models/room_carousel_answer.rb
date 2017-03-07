@@ -42,6 +42,5 @@ class RoomCarouselAnswer < Answer
 
   def change_defaults
     self.quik_replies = false
-    self.quik_replies =
   end
 end
