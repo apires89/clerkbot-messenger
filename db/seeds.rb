@@ -65,7 +65,7 @@ available_rooms = [suite, double_room, family_room, dorm]
 
 answer = SimpleAnswer.new(message: "Good to see you! :) I can give you information about our Services, the city of Sintra or help you Book a night @ Moonhill!\n\n (Remember you can always type **home** to receive this message again!)")
 answer.save!
-top = Intent.new(q_string: "start", q_key: 'start')
+top = Intent.new(q_string: "root", q_key: 'root')
 top.answer = answer
 top.save!
 

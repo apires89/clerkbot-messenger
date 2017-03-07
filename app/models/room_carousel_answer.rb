@@ -17,7 +17,7 @@ class RoomCarouselAnswer < Answer
           {
             title: room.name,
             image_url: room.photo_url,
-            subtitle: "Room for " + room.capacity.to_s + "people",
+            subtitle: "Room for " + room.capacity.to_s + " people.\n#{room.description}.",
             buttons:[
               {
                 type: "web_url",
@@ -26,7 +26,7 @@ class RoomCarouselAnswer < Answer
                 #{format_dates(user.bookings.last.checkin)}/
                 #{format_dates(user.bookings.last.checkout)}/
                 #{
-                  if room.name == "Dorm" && room.name == "Family Room"
+                  if room.name == "Dorm" || room.name == "Family Room"
                     "dorm"
                   else
                     "private"
