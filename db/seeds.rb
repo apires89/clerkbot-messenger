@@ -1,8 +1,9 @@
 Booking.destroy_all
 FbUser.destroy_all
 Intent.destroy_all
-Hostel.destroy_all
 Room.destroy_all
+Hostel.destroy_all
+
 
 # ------------------ Create property -----------------
 
@@ -61,6 +62,9 @@ available_rooms = [suite, double_room, family_room, dorm]
 
 
 
+
+
+
 #Create flow of conversation
 
 answer = SimpleAnswer.new(message: "Good to see you! :) I can give you information about our Services, the city of Sintra or help you Book a night @ Moonhill!\n\n (Remember you can always type **home** to receive this message again!)")
@@ -93,19 +97,13 @@ top.save!
     checkout_intent.answer = answer
     checkout_intent.save!
 
-    answer = CarouselAnswer.new(message: "Please choose one of our cozy rooms!")
+    answer = RoomCarouselAnswer.new(message: "Please choose one of our cozy rooms!")
     answer.save!
     room_intent = Intent.new(q_string: "Available Rooms", q_key: 'available_rooms')
     room_intent.parent_intent = checkout_intent
     room_intent.answer = answer
     room_intent.save!
 
-      answer = RoomCarouselAnswer.new(available_rooms)
-      answer.save!
-      pickroom_itent = Intent.new(q_string: "#{room.name}", q_key: "room#{room.id}")
-      pickroom_itent.parent_intent = room_intent
-      pickroom_itent.answer = answer
-      pickroom_itent.save!
 
 
 # Where to eat

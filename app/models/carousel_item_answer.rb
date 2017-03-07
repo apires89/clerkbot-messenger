@@ -9,7 +9,7 @@ class CarouselItemAnswer < Answer
       buttons:[
         {
           type: "postback",
-          title: "See details",
+          title: "Select",
           payload: intent.q_key
         }
       ]
@@ -22,4 +22,6 @@ class CarouselItemAnswer < Answer
       text: name
     }]
   end
+
+
 end
