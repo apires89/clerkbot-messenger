@@ -59,36 +59,64 @@ info_intent.save!
   intent.save!
 end
 
-answer = ComplexAnswer.new(message: "Would you like to get general information about the hostel operations?")
+answer = SimpleAnswer.new(message: "Would you like to know the services we have for you?")
 answer.save!
 services_intent = Intent.new(q_string: "Services", q_key: 'services')
 services_intent.parent_intent = top
 services_intent.answer = answer
 services_intent.save!
 
+answer = ComplexAnswer.new(message: "Would you like to know the services we have for you?")
+answer.save!
+services_intent = Intent.new(q_string: "Services", q_key: 'services')
+services_intent.parent_intent = top
+services_intent.answer = answer
+services_intent.save!
 
-    answer = SimpleAnswer.new(message: "Find all useful information below:\n\nCheck-In: from 1PM.\nCheck-Out: until 11AM.\n24 hour working reception.\nBreakfast included in the rate.\nBreakfast from 7AM to 11AM.")
+    # answer = ComplexAnswer.new(message: "Here is the full list of available services.")
+    # answer.save!
+    # intent = Intent.new(q_string: "List", q_key: "all")
+    # intent.parent_intent = services_intent
+    # intent.answer = answer
+    # intent.save!
+
+
+    answer = SimpleAnswer.new(message: "Here are our base services:\n\nCheck-In: from 1PM.\nCheck-Out: until 11AM.\n - 24 hour working reception.\n- Inhouse restaurant\nBreakfast from 7AM to 11AM.\n Guest kitchen.\n")
     answer.save!
-    intent = Intent.new(q_string: "General Info", q_key: 'general_info')
+    intent = Intent.new(q_string: "Base", q_key: 'base_info')
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
 
 
-    answer = SimpleAnswer.new(message: "You can rent bikes for low low prices, 20 per day! Ask reseption")
+
+    answer = SimpleAnswer.new(message: "Here are our complementary services:\n\nWi-fi\nKeycard room access\nAir Conditioning\nStorage lockers\nCraddle for infants.\n")
     answer.save!
-    intent = Intent.new(q_string: "Bike rental", q_key: "bike_rental")
+    intent = Intent.new(q_string: "Complementary", q_key: "complementary")
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
 
 
-    answer = SimpleAnswer.new(message: "Leave clothes in designaded laundry basket on bed")
+
+    answer = SimpleAnswer.new(message: "Here are our entertainement services:\n\nBoard Games\nCable Tv\nBooks\nDVD\nPlaystation\n")
     answer.save!
-    intent = Intent.new(q_string: "Laundry", q_key: "laundry")
+    intent = Intent.new(q_string: "Entertainement", q_key: "entertainement")
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
+
+
+
+
+    answer = SimpleAnswer.new(message: "We also have Towels,Hair-dryers and Plug-adapters available for a small fee :)")
+    answer.save!
+    intent = Intent.new(q_string: "Rent", q_key: "rent")
+    intent.parent_intent = services_intent
+    intent.answer = answer
+    intent.save!
+
+
 
 
 answer = SimpleAnswer.new(message: "We have a restaurant in the hostel! Would you like to check other places?")
@@ -109,27 +137,63 @@ restaurant_names = ["Happy place", "Some place", "Old place"]
     intent.answer = answer
     intent.save!
 end
-
-answer = CarouselAnswer.new(message: "Here are our activities?")
+################################################ ACTIVITIES AWNSER#################
+answer = CarouselAnswer.new(message: "Here are our activities! I wish i could come along but im a bot.. :(")
 answer.save!
 info_intent = Intent.new(q_string: "Activities", q_key: 'activities')
 info_intent.parent_intent = top
 info_intent.answer = answer
 info_intent.save!
 
-4.times do |i|
-  answer = CarouselItemAnswer.new(name: "Biking tour",
-    photo: "http://cdn.snowkingmountain.com/wp-content/uploads/2015/10/biking-miles-of-pathways-in-jackson-hole-1024x683.jpg",
-    title: "Biking tour",
-    subtitle: "Nice biking",
+
+  answer = CarouselItemAnswer.new(name: "Experience local gastronomy",
+    photo: "http://res.cloudinary.com/dqltnr3rd/image/upload/c_scale,h_157,w_374/v1488901062/gastronomia-travesseiro_pt_icwcvb.jpg",
+    title: "Try Queijadas and Travesseiros",
+    subtitle: "Local Pastry",
 
     )
   answer.save!
-  intent = Intent.new(q_string: "Biking tour #{i}", q_key: "biking_tour#{i}")
+  intent = Intent.new(q_string: "Gastronomy", q_key: "gastronomy")
   intent.parent_intent = info_intent
   intent.answer = answer
   intent.save!
-end
+
+answer = CarouselItemAnswer.new(name: "Take the tram to the beach",
+    photo: "http://res.cloudinary.com/dqltnr3rd/image/upload/c_scale,w_457/v1488901365/tourist_train.jpg",
+    title: "Sintra tram to Praia Grande",
+    subtitle: "Iconic local tram",
+
+    )
+  answer.save!
+  intent = Intent.new(q_string: "tram", q_key: "local_tram")
+  intent.parent_intent = info_intent
+  intent.answer = answer
+  intent.save!
+
+  answer = CarouselItemAnswer.new(name: "Surf around Sintra",
+    photo: "http://res.cloudinary.com/dqltnr3rd/image/upload/v1488899268/surf_activity.jpg",
+    title: "Surfing",
+    subtitle: "Quality beach breaks at Praia Grande",
+    )
+  answer.save!
+  intent = Intent.new(q_string: "Biking tour ", q_key: "biking_tour")
+  intent.parent_intent = info_intent
+  intent.answer = answer
+  intent.save!
+
+  answer = CarouselItemAnswer.new(name: "Pena National Park",
+    photo: "http://res.cloudinary.com/dqltnr3rd/image/upload/v1488902411/national_park.jpg",
+    title: "Visti Pena's beautiful national park",
+    subtitle: "Amazing experience",
+
+    )
+  answer.save!
+  intent = Intent.new(q_string: "National park", q_key: "national_park")
+  intent.parent_intent = info_intent
+  intent.answer = answer
+  intent.save!
+
+  #################################################################
 
 
 
