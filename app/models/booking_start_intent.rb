@@ -6,6 +6,6 @@ class BookingStartIntent < PipelineIntent
     end
     booking = Booking.new
     booking.fb_user = user
-    booking.save
+    booking.save!
   end
 end
