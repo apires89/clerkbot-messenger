@@ -1,7 +1,7 @@
 class SimpleAnswer < Answer
   validates :message, presence: true
   private
-  def make_messages(user_info = {})
+  def make_messages(user = nil)
     [{
       text: message
     }]

@@ -24,6 +24,8 @@ gem 'cloudinary'
 gem 'attachinary', github: 'assembler/attachinary'
 gem 'jquery-fileupload-rails'
 gem 'coffee-rails'
+gem 'pg_search'
+gem 'google_places'
 
 
 group :development, :test do

@@ -11,7 +11,11 @@ class Answer < ApplicationRecord
         }
       end
     else
-      quick_replies = []
+      quick_replies = [{
+            content_type: 'text',
+            title: "Back to start",
+            payload: "root"
+        }]
     end
     ret.last[:quick_replies] = quick_replies if quick_replies.length > 0
     ret
