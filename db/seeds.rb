@@ -83,14 +83,14 @@ top.save!
   booking_intent.answer = answer
   booking_intent.save!
 
-    answer = NoReplyAnswer.new(message: "When are you checking in? (dd mm yyyy)")
+    answer = NoReplyAnswer.new(message: "When are you checking in?")
     answer.save!
     checkin_intent = BookingDateIntent.new(q_string: "Continue", q_key: 'booking_start_date', field: 'checkin')
     checkin_intent.parent_intent = booking_intent
     checkin_intent.answer = answer
     checkin_intent.save!
 
-    answer = NoReplyAnswer.new(message: "When are you leaving? (dd mm yyyy)")
+    answer = NoReplyAnswer.new(message: "When are you leaving?")
     answer.save!
     checkout_intent = BookingDateIntent.new(q_string: "Continue", q_key: 'booking_end_date', field: 'checkout')
     checkout_intent.parent_intent = checkin_intent

@@ -27,6 +27,7 @@ gem 'jquery-fileupload-rails'
 gem 'coffee-rails'
 gem 'pg_search'
 gem 'google_places'
+gem 'chronic'
 
 
 group :development, :test do

@@ -2,9 +2,7 @@ class BookingDateIntent < PipelineIntent
   validates :field, presence: true
 
   def process_data(params = {})
-    begin
-      date = Date.parse(params[:data].gsub(' ', '-'))
-    rescue
+    unless date = Chronic.parse(params[:data])
       return false
     end
     params[:user].booking.update_attribute(field.to_sym, date.to_s(:db))
