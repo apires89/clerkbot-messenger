@@ -49,7 +49,7 @@ class Brain
     elsif text.present?
       process_text
     else
-      send_text("I can't reply :(")
+      send_error
     end
   end
 
@@ -64,18 +64,10 @@ class Brain
     end
   end
 
-  def process_postback_pipeline
-    if user.prev_intent.process_data(data: payload, user: user)
-      @intent = user.prev_intent.child_intents.first
-      user.prev_intent = @intent
-      user.save
-      send_messages
-    else
-      send_pipeline_error
-    end
-  end
-
   def process_postback
+    if user.prev_intent && user.prev_intent.is_pipeline
+      user.prev_intent.process_data(data: payload, user: user)
+    end
     @intent = Intent.find_by(q_key: payload) || Intent.first
     user.prev_intent = @intent
     user.save
