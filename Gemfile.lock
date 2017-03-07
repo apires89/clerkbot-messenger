@@ -99,8 +99,11 @@ GEM
     ffi (1.9.17)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
+    geocoder (1.4.3)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    google_places (0.33.0)
+      httparty (>= 0.13.1, < 0.14.1)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httparty (0.13.7)
@@ -141,6 +144,10 @@ GEM
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     pg (0.19.0)
+    pg_search (2.0.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      arel (>= 6)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -244,11 +251,17 @@ DEPENDENCIES
   faker
   faraday
   font-awesome-sass
+<<<<<<< HEAD
+=======
+  geocoder
+  google_places
+>>>>>>> f60cb493474efe5cb248ee6f5d4ba63cebd43533
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails
   listen (~> 3.0.5)
   pg
+  pg_search
   pry-byebug
   pry-rails
   puma

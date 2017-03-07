@@ -19,11 +19,14 @@ gem 'faker'
 gem 'facebook-messenger', "0.8.0"
 gem 'dotenv-rails'
 gem 'faraday'
+gem "geocoder"
 
 gem 'cloudinary'
 gem 'attachinary', github: 'assembler/attachinary'
 gem 'jquery-fileupload-rails'
 gem 'coffee-rails'
+gem 'pg_search'
+gem 'google_places'
 
 
 group :development, :test do
@@ -36,5 +39,4 @@ group :development, :test do
   gem 'listen', '~> 3.0.5'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
 
