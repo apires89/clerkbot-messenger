@@ -40,5 +40,7 @@ class RoomCarouselAnswer < Answer
     date.strftime('%Y-%m-%d')
   end
 
-
+  def change_defaults
+    self.quik_replies = false
+  end
 end
