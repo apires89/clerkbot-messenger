@@ -251,11 +251,8 @@ DEPENDENCIES
   faker
   faraday
   font-awesome-sass
-<<<<<<< HEAD
-=======
   geocoder
   google_places
->>>>>>> f60cb493474efe5cb248ee6f5d4ba63cebd43533
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails
