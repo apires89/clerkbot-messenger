@@ -100,7 +100,7 @@ top.save!
 
     answer = RoomCarouselAnswer.new(message: "Please choose one of our cozy rooms!")
     answer.save!
-    room_intent = PipelineIntent.new(q_string: "Available Rooms", q_key: 'available_rooms')
+    room_intent = Intent.new(q_string: "Available Rooms", q_key: 'available_rooms', searchable: false)
     room_intent.parent_intent = checkout_intent
     room_intent.answer = answer
     room_intent.save!
@@ -272,9 +272,9 @@ location_intent.save!
 search_keys = ['museum', 'atm', 'grocery_or_supermarket', 'cafe', 'car_rental', 'restaurant']
 
 search_keys.each do |key|
-  answer = GoogleApiCarouselAnswer.new(name: key, message: "Here are your search results! (Powered by GoogleMaps™️)")
+  answer = GoogleApiCarouselAnswer.new(name: key, message: "Here are the closest #{key.gsub('_', ' ').split(' ')[-1].capitalize}s I could find! (Powered by GoogleMaps™️)")
   answer.save!
-  google_intent = Intent.new(q_string: key.gsub('_', ' ').capitalize, q_key: "google_api_#{key}")
+  google_intent = Intent.new(q_string: "Search for " + key.gsub('_', ' ').capitalize + "s", q_key: "google_api_#{key}")
   google_intent.parent_intent = location_intent
   google_intent.answer = answer
   google_intent.save!
