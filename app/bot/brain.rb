@@ -102,19 +102,23 @@ class Brain
     posible_intents = []
     words.each do |word|
       if word.length > 2
-        res = Intent.search(word)
+        res = Intent.where(searchable: true).search(word)
         posible_intents += res
       end
     end
     frequency = Hash.new(0)
     posible_intents.each { |intent| frequency[intent] += 1 }
+    intents_whit_rank = frequency.sort_by{|intent, f| -f}
     if posible_intents.length == 0 || posible_intents.length > 3
       send_error
     elsif posible_intents.length == 1
       @intent = posible_intents.first
       send_messages
+    elsif intents_whit_rank[0][1] < intents_whit_rank[1][1]
+      @intent = intents_whit_rank[0][0]
+      send_messages
     else
-      intents = frequency.sort_by{|intent, f| -f}.map{ |e| e.first}
+      intents = intents_whit_rank.map{ |e| e.first}
       send_did_u_mean(intents)
     end
   end

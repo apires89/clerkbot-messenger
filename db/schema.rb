@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308130654) do
+ActiveRecord::Schema.define(version: 20170308152715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20170308130654) do
     t.string   "field"
     t.boolean  "is_pipeline", default: false, null: false
     t.string   "tag"
+    t.boolean  "searchable",  default: true,  null: false
     t.index ["answer_id"], name: "index_intents_on_answer_id", using: :btree
     t.index ["intent_id"], name: "index_intents_on_intent_id", using: :btree
   end
