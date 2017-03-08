@@ -70,7 +70,7 @@ available_rooms = [suite, double_room, family_room, dorm]
 
 answer = SimpleAnswer.new(message: "Good to see you! :) I can give you information about our Services, the city of Sintra or help you Book a night @ Moonhill!\n\n (Remember you can always type **home** to receive this message again!)")
 answer.save!
-top = Intent.new(q_string: "Home", q_key: 'root')
+top = Intent.new(q_string: "Home", tag: 'home back exit start',q_key: 'root')
 top.answer = answer
 top.save!
 
@@ -100,7 +100,7 @@ top.save!
 
     answer = RoomCarouselAnswer.new(message: "Please choose one of our cozy rooms!")
     answer.save!
-    room_intent = Intent.new(q_string: "Available Rooms", q_key: 'available_rooms')
+    room_intent = PipelineIntent.new(q_string: "Available Rooms", q_key: 'available_rooms')
     room_intent.parent_intent = checkout_intent
     room_intent.answer = answer
     room_intent.save!

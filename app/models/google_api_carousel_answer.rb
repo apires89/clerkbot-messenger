@@ -1,9 +1,9 @@
 class GoogleApiCarouselAnswer < CarouselAnswer
   private
   def make_messages(user_info = {})
-    []
     client = GooglePlaces::Client.new(ENV["GOOGLE_PLACES_KEY"])
-    results = client.spots(38.713889, -9.139444, types: name, rankby: "distance")
+    hostel = Hostel.last
+    results = client.spots(hostel.latitude, hostel.longitude, types: name, rankby: "distance")
     elements = results[0...5].map do |result|
       place_result = client.spot(result.place_id)
       {

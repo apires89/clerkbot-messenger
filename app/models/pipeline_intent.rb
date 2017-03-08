@@ -7,5 +7,6 @@ class PipelineIntent < Intent
   private
   def change_defaults
     self.is_pipeline = true
+    self.searchable = false
   end
 end
