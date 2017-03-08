@@ -5,6 +5,8 @@ Room.destroy_all
 Hostel.destroy_all
 
 
+
+
 # ------------------ Create property -----------------
 
 moonhill_hostel = Hostel.new({

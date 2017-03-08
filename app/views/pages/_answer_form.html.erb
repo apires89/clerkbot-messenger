@@ -1,0 +1,45 @@
+<div class="answer_wrapper">
+  <h3><%= answer.intent.q_string %></h3>
+  <%= form.simple_fields_for answer , url: page_path(answer), method: :post do |f| %>
+    <% if answer.name %>
+      <%= f.input :name %>
+    <% end %>
+
+    <% if answer.title %>
+      <%= f.input :title %>
+    <% end %>
+
+    <% if answer.subtitle %>
+      <%= f.input :subtitle %>
+    <% end %>
+
+    <% if answer.message %>
+      <%= f.input :message, as: :text %>
+    <% end %>
+
+    <% if answer.location %>
+      <%= f.input :location %>
+    <% end %>
+
+    <% if answer.time %>
+      <%= f.input :time %>
+    <% end %>
+
+    <% if answer.price %>
+      <%= f.input :price, as: :integer, input_html: { min: '0'} %>
+    <% end %>
+
+    <% if answer.url %>
+      <%= f.input :url %>
+    <% end %>
+
+    <% if answer.description %>
+      <%= f.input :description %>
+    <% end %>
+
+    <% if answer.duration %>
+      <%= f.input :duration %>
+    <% end %>
+
+  <% end %>
+</div>
