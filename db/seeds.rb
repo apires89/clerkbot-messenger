@@ -21,7 +21,8 @@ moonhill_hostel.save!
 suite = Room.new({
                       name:         "Suite",
                       description:  "Rooms with an excellent view, with all the comfort to take a rest from the busy day.",
-                      capacity:      2
+                      capacity:      2,
+                      price:         130.00,
   })
 suite.hostel = moonhill_hostel
 suite.save!
@@ -31,7 +32,8 @@ suite.save!
 double_room = Room.new({
                       name:         "Double Room",
                       description:  "Room for two people, with a shared bathroom right in front, and, of course, the view of the Sintra Palace.",
-                      capacity:     2
+                      capacity:     2,
+                      price:         130.00,
   })
 double_room.hostel = moonhill_hostel
 double_room.save!
@@ -41,7 +43,8 @@ double_room.save!
 dorm = Room.new({
                       name:         "Dorm",
                       description:  "Shared rooms, shared experiences. The room to know more people, with an excellent view of both the Palace and the Castle.",
-                      capacity:     4
+                      capacity:     4,
+                      price:         130.00,
   })
 dorm.hostel = moonhill_hostel
 dorm.save!
@@ -51,7 +54,8 @@ dorm.save!
 family_room = Room.new({
                       name:         "Family Room",
                       description:  "The perfect room for a couple with two children, a double bed and a bunkbed make the perfect combination, with a small private patio.",
-                      capacity:     4
+                      capacity:     4,
+                      price:         130.00,
   })
 family_room.hostel = moonhill_hostel
 family_room.save!
