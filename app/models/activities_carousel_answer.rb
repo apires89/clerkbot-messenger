@@ -9,11 +9,11 @@ class ActivitiesCarouselAnswer < Answer
       buttons:[
         {
           type: "postback",
-          title: "Select",
+          title: "See Details",
           payload: intent.q_key
         },{
           type: "web_url",
-          title: "Select",
+          title: "Visit Website",
           url: url
         }
       ]
@@ -24,7 +24,7 @@ class ActivitiesCarouselAnswer < Answer
   private
   def make_messages(user_info = {})
     [{
-      text: name
+      text: description
     }]
   end
 

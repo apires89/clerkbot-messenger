@@ -193,7 +193,7 @@ info_intent.save!
     subtitle: "Local Pastry",
     price: "5€ aprox.",
     duration: "30 mins",
-    description:  "About 500 year old local pastry from Sintra, a must have.",
+    description:  "About 500 year old local pastry from Sintra, a must have. 🍮",
     url:  "https://www.piriquita.pt/"
     )
   answer.save!
@@ -208,7 +208,7 @@ answer = ActivitiesCarouselAnswer.new(name: "Sintra Tram",
     subtitle: "Iconic local tram",
     price: "3€",
     duration: "40 mins",
-    description:  "The Sintra tram (Electrico de Sintra) connects Sintra with the resort town of Praia das Maçãs 13km to the west. The Sintra tram uses classic 1930 Brill trams, which slowly trundle down from the hills of the Serra de Sintra to the pretty coastal town. The tram ride is quaint and enjoyable but the number of services is very limited and tend to be very busy in the summer.",
+    description:  "The Sintra tram 🚋 connects Sintra with the resort town of Praia das Maçãs 🌊13km to the west.\nThe Sintra tram uses classic 1930 Brill trams, which slowly trundle down from the hills of the Serra de Sintra 🌄 to the pretty coastal town. The tram ride is quaint and enjoyable but the number of services is very limited and tend to be very busy in the summer.",
     url:  "http://www.cm-sintra.pt/phocadownload/sa-h-inverno-16_17%20a4.pdf"
 
     )
@@ -224,7 +224,7 @@ answer = ActivitiesCarouselAnswer.new(name: "Sintra Tram",
     subtitle: "Quality beach breaks at Praia Grande",
     price: "30€/class",
     duration: "2 hours",
-    description:  "Enjoy classic beachbreaks and world class waves in Sintra's coastline.",
+    description:  "Enjoy classic beachbreaks and world class waves in Sintra's coastline.🏄",
     url:  "http://www.sintrasurf.com/surf-lesson-packs-prices/"
     )
   answer.save!
@@ -239,7 +239,7 @@ answer = ActivitiesCarouselAnswer.new(name: "Sintra Tram",
     subtitle: "Amazing experience",
     price: "Free",
     duration: "1h30mins",
-    description:  "Located in the Sintra hills, the Park and Palace of Pena are the fruit of King Ferdinand II’s creative genius and the greatest expression of 19th-century romanticism in Portugal, denoting clear influences from the Manueline and Moorish styles of architecture. The palace was built in such a way as to be visible from any point in the park, which consists of a forest and luxuriant gardens with over five hundred different species of trees originating from the four corners of the earth.",
+    description:  "Located in the Sintra hills 🏞️ ,the palace was built in such a way as to be visible from any point in the park.\nConsists of a forest and luxuriant gardens with over five hundred different species of trees 🌴🌳🌲originating from the four corners of the earth. 🐛",
     url:  "http://www.parquesdesintra.pt/en/parks-and-monuments/park-and-national-palace-of-pena/"
 
 

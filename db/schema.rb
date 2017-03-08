@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20170307184618) do
     t.index ["hostel_id"], name: "index_activities_on_hostel_id", using: :btree
   end
 
+
   create_table "answers", force: :cascade do |t|
     t.string   "photo"
     t.string   "type"
