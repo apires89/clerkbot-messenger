@@ -262,7 +262,7 @@ answer = ActivitiesCarouselAnswer.new(name: "Sintra Tram",
 
 
 
-answer = SimpleAnswer.new(message: "Select what u want to search for")
+answer = SimpleAnswer.new(message: "What sort of place are looking for?")
 answer.save!
 location_intent = Intent.new(q_string: "Nearby places 📍", q_key: 'places')
 location_intent.parent_intent = top
@@ -272,7 +272,7 @@ location_intent.save!
 search_keys = ['museum', 'atm', 'grocery_or_supermarket', 'cafe', 'car_rental', 'restaurant']
 
 search_keys.each do |key|
-  answer = GoogleApiCarouselAnswer.new(name: key, message: "Select to get details!")
+  answer = GoogleApiCarouselAnswer.new(name: key, message: "Here are your search results! (Powered by GoogleMaps™️)")
   answer.save!
   google_intent = Intent.new(q_string: key.gsub('_', ' ').capitalize, q_key: "google_api_#{key}")
   google_intent.parent_intent = location_intent
