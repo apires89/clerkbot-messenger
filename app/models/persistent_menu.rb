@@ -7,23 +7,18 @@ class PersistentMenu
       call_to_actions: [
         {
           type: 'postback',
-          title: 'Home',
+          title: '🏠 Home',
           payload: 'root'
         },
         {
           type: 'postback',
-          title: 'Activities',
-          payload: 'activities'
-        },
-        {
-          type: 'postback',
-          title: 'Services',
-          payload: 'services'
-        },
-        {
-          type: 'postback',
-          title: 'Restaurants',
+          title: '🍽️ Hostel Restaurant',
           payload: 'restaurants'
+        },
+        {
+          type: 'postback',
+          title: '📍 Nearby Places',
+          payload: 'places'
         }
       ]
     })

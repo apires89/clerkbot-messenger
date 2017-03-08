@@ -16,7 +16,7 @@ class Greetings
     Facebook::Messenger::Thread.set({
       setting_type: 'greeting',
       greeting: {
-        text: 'Welcome to Moonhill Hostel :) '
+        text: 'Hi {{user_first_name}}, Welcome to Moonhill Hostel 🖼️. I Hope you enjoy this expericence, and if you come up with any difficulties contact us @ clerkbot@outlook.com'
     }})
   end
 end
