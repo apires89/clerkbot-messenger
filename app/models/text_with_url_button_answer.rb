@@ -16,6 +16,8 @@ class TextWithUrlButtonAnswer < Answer
             type: "web_url",
             title: "Select",
             url: url
+
+
           }
         ]
       }
