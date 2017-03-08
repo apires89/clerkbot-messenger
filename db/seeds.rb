@@ -75,7 +75,7 @@ top.save!
 
   answer = SimpleAnswer.new(message: "To look for availible rooms we need some information from you, if you want to exit booking you can at any time click exit.")
   answer.save!
-  booking_intent = BookingStartIntent.new(q_string: "Book Now!", q_key: 'booking')
+  booking_intent = BookingStartIntent.new(q_string: "Book Now!", q_key: 'booking', tag: 'booking reservation stay room dates')
   booking_intent.parent_intent = top
   booking_intent.answer = answer
   booking_intent.save!
@@ -107,7 +107,7 @@ top.save!
 
 answer = ComplexAnswer.new(message: "Would you like to know the services we have for you?")
 answer.save!
-services_intent = Intent.new(q_string: "Services", q_key: 'services')
+services_intent = Intent.new(q_string: "Services", q_key: 'services', tag: 'services information')
 services_intent.parent_intent = top
 services_intent.answer = answer
 services_intent.save!
@@ -180,7 +180,7 @@ services_intent.save!
 
 answer = SimpleAnswer.new(message: "We have a restaurant in the hostel! Would you like to check other places?")
 answer.save!
-eat_intent = Intent.new(q_string: "Restaurants", q_key: 'restaurants')
+eat_intent = Intent.new(q_string: "Restaurants", q_key: 'restaurants', tag: 'eat restaurant')
 eat_intent.parent_intent = top
 eat_intent.answer = answer
 eat_intent.save!
