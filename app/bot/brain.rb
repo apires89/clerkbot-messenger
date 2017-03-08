@@ -49,7 +49,7 @@ class Brain
     elsif text.present?
       process_text
     else
-      send_text("I can't reply :(")
+      send_error
     end
   end
 
@@ -64,18 +64,10 @@ class Brain
     end
   end
 
-  def process_postback_pipeline
-    if user.prev_intent.process_data(data: payload, user: user)
-      @intent = user.prev_intent.child_intents.first
-      user.prev_intent = @intent
-      user.save
-      send_messages
-    else
-      send_pipeline_error
-    end
-  end
-
   def process_postback
+    if user.prev_intent && user.prev_intent.is_pipeline
+      user.prev_intent.process_data(data: payload, user: user)
+    end
     @intent = Intent.find_by(q_key: payload) || Intent.first
     user.prev_intent = @intent
     user.save
@@ -116,12 +108,14 @@ class Brain
     end
     frequency = Hash.new(0)
     posible_intents.each { |intent| frequency[intent] += 1 }
-    #byebug
-    if posible_intents.length == 0
+    if posible_intents.length == 0 || posible_intents.length > 3
       send_error
-    else
-      @intent = frequency.sort_by{|intent, f| -f}.first.first
+    elsif posible_intents.length == 1
+      @intent = posible_intents.first
       send_messages
+    else
+      intents = frequency.sort_by{|intent, f| -f}.map{ |e| e.first}
+      send_did_u_mean(intents)
     end
   end
 
@@ -145,6 +139,28 @@ class Brain
             title: "Exit",
             payload: 'root'
         }]
+      }
+    )
+  end
+
+  def send_did_u_mean(intents)
+    quick_replies = intents.map do |n|
+        {
+            content_type: 'text',
+            title: n.q_string,
+            payload: n.q_key
+        }
+    end
+    quick_replies << {
+            content_type: 'text',
+            title: "Back to start",
+            payload: 'root'
+        }
+    Bot.deliver(
+      recipient: sender,
+      message: {
+        text: "Sorry, didn't quit understand that. Did you mean?",
+        quick_replies: quick_replies
       }
     )
   end

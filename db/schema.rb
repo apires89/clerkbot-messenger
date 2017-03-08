@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307184618) do
+ActiveRecord::Schema.define(version: 20170308130654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20170307184618) do
     t.string   "url"
     t.index ["hostel_id"], name: "index_activities_on_hostel_id", using: :btree
   end
-
 
   create_table "answers", force: :cascade do |t|
     t.string   "photo"
@@ -114,6 +113,7 @@ ActiveRecord::Schema.define(version: 20170307184618) do
     t.string   "type"
     t.string   "field"
     t.boolean  "is_pipeline", default: false, null: false
+    t.string   "tag"
     t.index ["answer_id"], name: "index_intents_on_answer_id", using: :btree
     t.index ["intent_id"], name: "index_intents_on_intent_id", using: :btree
   end
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20170307184618) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "name"
+    t.float    "price"
     t.index ["hostel_id"], name: "index_rooms_on_hostel_id", using: :btree
   end
 
