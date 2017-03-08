@@ -107,9 +107,10 @@ top.save!
 
 
 
-# Where to eat
+################################################ SERVICES AWNSER#################
 
-answer = ComplexAnswer.new(message: "Would you like to know the services we have for you?")
+
+answer = SimpleAnswer.new(message: "Would you like to know the services we have for you? 🛎️")
 answer.save!
 services_intent = Intent.new(q_string: "Services", q_key: 'services', tag: 'services information')
 services_intent.parent_intent = top
@@ -123,37 +124,16 @@ services_intent.save!
     # intent.answer = answer
     # intent.save!
 
-    answer = SimpleAnswer.new(message: "from 1PM.")
+    answer = SimpleAnswer.new(message: "Breakfast included in the rate, from 7AM to 11AM.🍞\nCheck-In: from 1PM. - Check-Out: until 11AM.🛏️\n24 hour working reception.💂")
     answer.save!
-    intent = Intent.new(q_string: "Check In", q_key: 'check_in')
-    intent.parent_intent = services_intent
-    intent.answer = answer
-    intent.save!
-
-    answer = SimpleAnswer.new(message: "until 11AM.")
-    answer.save!
-    intent = Intent.new(q_string: "Check Out", q_key: "check_out")
-    intent.parent_intent = services_intent
-    intent.answer = answer
-    intent.save!
-
-    answer = SimpleAnswer.new(message: "24 hour working reception.")
-    answer.save!
-    intent = Intent.new(q_string: "Reseption", q_key: "reseption")
-    intent.parent_intent = services_intent
-    intent.answer = answer
-    intent.save!
-
-    answer = SimpleAnswer.new(message: "Breakfast included in the rate, from 7AM to 11AM.")
-    answer.save!
-    intent = Intent.new(q_string: "Breakfast", q_key: 'breakfast')
+    intent = Intent.new(q_string: "General Information", q_key: 'check_in')
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
 
 
 
-    answer = SimpleAnswer.new(message: "Here are our complementary services:\n\nWi-fi\nKeycard room access\nAir Conditioning\nStorage lockers\nCraddle for infants.\n")
+    answer = SimpleAnswer.new(message: "Here are our complementary services:\n\nWi-fi📡\nKeycard room access💳\nAir Conditioning ❄️️\nStorage lockers 🛅\nCraddle for infants.🚼\n")
     answer.save!
     intent = Intent.new(q_string: "Complementary", q_key: "complementary")
     intent.parent_intent = services_intent
@@ -162,7 +142,7 @@ services_intent.save!
 
 
 
-    answer = SimpleAnswer.new(message: "Here are our entertainement services:\n\nBoard Games\nCable Tv\nBooks\nDVD\nPlaystation\n")
+    answer = SimpleAnswer.new(message: "Here are our entertainement services:\n\nBoard Games 🎲\nCable Tv 📺\nBooks 📚\nDVD 📀\nPlaystation 🎮\n")
     answer.save!
     intent = Intent.new(q_string: "Entertainement", q_key: "entertainement")
     intent.parent_intent = services_intent
@@ -172,34 +152,36 @@ services_intent.save!
 
 
 
-    answer = SimpleAnswer.new(message: "We also have Towels,Hair-dryers and Plug-adapters available for a small fee :)")
+    answer = SimpleAnswer.new(message: "We also have Towels 🚿, Hair-dryers and Plug-adapters 🔌 available for a small fee :)")
     answer.save!
     intent = Intent.new(q_string: "Rent", q_key: "rent")
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
 
+################################################ Restaurant AWNSER  #################
 
 
-
-answer = SimpleAnswer.new(message: "We have a restaurant in the hostel! Would you like to check other places?")
+answer = CarouselAnswer.new(message: "We have a restaurant in the hostel! Its called Caldo Entornado 😋")
 answer.save!
-eat_intent = Intent.new(q_string: "Restaurants", q_key: 'restaurants', tag: 'eat restaurant')
+eat_intent = Intent.new(q_string: "Hostel Restaurant 😋", q_key: 'restaurants')
 eat_intent.parent_intent = top
 eat_intent.answer = answer
 eat_intent.save!
-restaurant_names = ["Happy place", "Some place", "Old place"]
-3.times do |i|
-    answer = RestaurantAnswer.new(message: Faker::Lorem.paragraph,
-      name: restaurant_names[i],
-      url: "https://www.google.pt/"
-      )
-    answer.save!
-    intent = Intent.new(q_string: restaurant_names[i], q_key: restaurant_names[i].delete(' ').downcase)
-    intent.parent_intent = eat_intent
-    intent.answer = answer
-    intent.save!
-end
+answer = RestaurantsCarouselAnswer.new(name: "Caldo Entornado",
+  photo: "http://res.cloudinary.com/dqltnr3rd/image/upload/v1488982372/photo2jpg_yho3lc.jpg",
+  title: "Caldo Entornado",
+  subtitle: "This space aims to be co-habitation between travelers and locals, allowing a total exchange of experiences and cultures. 🙌",
+  url: "https://www.thefork.com/restaurant/caldo-entornado/74968",
+  )
+  intent = Intent.new(q_string: "CaldoEntornado", q_key: 'hostel_restaurant')
+  intent.parent_intent = eat_intent
+  intent.answer = answer
+  intent.save!
+
+
+
+
 
 ################################################ ACTIVITIES AWNSER#################
 
