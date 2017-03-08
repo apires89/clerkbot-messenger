@@ -1,6 +1,5 @@
 class ActivitiesCarouselAnswer < Answer
-  validates :title, :url, :photo, :subtitle, presence: true
-
+  validates :description, :title, :url, :photo, :subtitle, presence: true
   def to_carousel_item
     {
       title: title,
@@ -24,8 +23,21 @@ class ActivitiesCarouselAnswer < Answer
   private
   def make_messages(user_info = {})
     [{
-      text: description
-    }]
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "button",
+        text: description,
+        buttons:[
+          {
+            type: "web_url",
+            title: "Visit their website.",
+            url: url
+          }
+        ]
+      }
+    }
+  }]
   end
 
 

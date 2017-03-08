@@ -22,7 +22,7 @@ suite = Room.new({
                       name:         "Suite",
                       description:  "Rooms with an excellent view, with all the comfort to take a rest from the busy day.",
                       capacity:      2,
-                      price:         130.00,
+                      price:         230.00,
   })
 suite.hostel = moonhill_hostel
 suite.save!
@@ -33,7 +33,7 @@ double_room = Room.new({
                       name:         "Double Room",
                       description:  "Room for two people, with a shared bathroom right in front, and, of course, the view of the Sintra Palace.",
                       capacity:     2,
-                      price:         130.00,
+                      price:         170.00,
   })
 double_room.hostel = moonhill_hostel
 double_room.save!
@@ -44,7 +44,7 @@ dorm = Room.new({
                       name:         "Dorm",
                       description:  "Shared rooms, shared experiences. The room to know more people, with an excellent view of both the Palace and the Castle.",
                       capacity:     4,
-                      price:         130.00,
+                      price:         50.00,
   })
 dorm.hostel = moonhill_hostel
 dorm.save!
@@ -55,7 +55,7 @@ family_room = Room.new({
                       name:         "Family Room",
                       description:  "The perfect room for a couple with two children, a double bed and a bunkbed make the perfect combination, with a small private patio.",
                       capacity:     4,
-                      price:         130.00,
+                      price:         200.00,
   })
 family_room.hostel = moonhill_hostel
 family_room.save!
@@ -68,7 +68,7 @@ available_rooms = [suite, double_room, family_room, dorm]
 
 #Create flow of conversation
 
-answer = SimpleAnswer.new(message: "Good to see you! :) I can give you information about our Services, the city of Sintra or help you Book a night @ Moonhill!\n\n (Remember you can always type **home** to receive this message again!)")
+answer = SimpleAnswer.new(message: "You can either type 📱, click buttons 👆, or use my navigation menu on the bottom of the screen ↙️ to ask me for something.\n\nWhat would you like to do next? :)")
 answer.save!
 top = Intent.new(q_string: "Home", tag: 'home back exit start',q_key: 'root')
 top.answer = answer
@@ -79,19 +79,19 @@ top.save!
 
   answer = SimpleAnswer.new(message: "To look for availible rooms we need some information from you, if you want to exit booking you can at any time click exit.")
   answer.save!
-  booking_intent = BookingStartIntent.new(q_string: "Book Now!", q_key: 'booking', tag: 'booking reservation stay room dates')
+  booking_intent = BookingStartIntent.new(q_string: "Book Now! 📅", q_key: 'booking', tag: 'booking reservation stay room dates')
   booking_intent.parent_intent = top
   booking_intent.answer = answer
   booking_intent.save!
 
-    answer = NoReplyAnswer.new(message: "When are you checking in?")
+    answer = NoReplyAnswer.new(message: "In which day are you checking in? 📅 ")
     answer.save!
     checkin_intent = BookingDateIntent.new(q_string: "Continue", q_key: 'booking_start_date', field: 'checkin')
     checkin_intent.parent_intent = booking_intent
     checkin_intent.answer = answer
     checkin_intent.save!
 
-    answer = NoReplyAnswer.new(message: "When are you leaving?")
+    answer = NoReplyAnswer.new(message: "In which day are you leaving? 📅")
     answer.save!
     checkout_intent = BookingDateIntent.new(q_string: "Continue", q_key: 'booking_end_date', field: 'checkout')
     checkout_intent.parent_intent = checkin_intent
@@ -112,7 +112,7 @@ top.save!
 
 answer = SimpleAnswer.new(message: "Would you like to know the services we have for you? 🛎️")
 answer.save!
-services_intent = Intent.new(q_string: "Services", q_key: 'services', tag: 'services information')
+services_intent = Intent.new(q_string: "Check our services 🏨", q_key: 'services', tag: 'services information')
 services_intent.parent_intent = top
 services_intent.answer = answer
 services_intent.save!
@@ -126,7 +126,7 @@ services_intent.save!
 
     answer = SimpleAnswer.new(message: "Breakfast included in the rate, from 7AM to 11AM.🍞\nCheck-In: from 1PM. - Check-Out: until 11AM.🛏️\n24 hour working reception.💂")
     answer.save!
-    intent = Intent.new(q_string: "General Information", q_key: 'check_in')
+    intent = Intent.new(q_string: "General Info ℹ️", q_key: 'check_in')
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
@@ -135,7 +135,7 @@ services_intent.save!
 
     answer = SimpleAnswer.new(message: "Here are our complementary services:\n\nWi-fi📡\nKeycard room access💳\nAir Conditioning ❄️️\nStorage lockers 🛅\nCraddle for infants.🚼\n")
     answer.save!
-    intent = Intent.new(q_string: "Complementary", q_key: "complementary")
+    intent = Intent.new(q_string: "Complementary 🎁", q_key: "complementary")
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
@@ -144,7 +144,7 @@ services_intent.save!
 
     answer = SimpleAnswer.new(message: "Here are our entertainement services:\n\nBoard Games 🎲\nCable Tv 📺\nBooks 📚\nDVD 📀\nPlaystation 🎮\n")
     answer.save!
-    intent = Intent.new(q_string: "Entertainement", q_key: "entertainement")
+    intent = Intent.new(q_string: "Entertainment 💃", q_key: "entertainement")
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
@@ -154,7 +154,7 @@ services_intent.save!
 
     answer = SimpleAnswer.new(message: "We also have Towels 🚿, Hair-dryers and Plug-adapters 🔌 available for a small fee :)")
     answer.save!
-    intent = Intent.new(q_string: "Rent", q_key: "rent")
+    intent = Intent.new(q_string: "Extras on request ➕", q_key: "rent")
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
@@ -164,7 +164,7 @@ services_intent.save!
 
 answer = CarouselAnswer.new(message: "We have a restaurant in the hostel! Its called Caldo Entornado 😋")
 answer.save!
-eat_intent = Intent.new(q_string: "Hostel Restaurant 😋", q_key: 'restaurants')
+eat_intent = Intent.new(q_string: "Book a table 🍴", q_key: 'restaurants')
 eat_intent.parent_intent = top
 eat_intent.answer = answer
 eat_intent.save!
@@ -187,7 +187,7 @@ answer = RestaurantsCarouselAnswer.new(name: "Caldo Entornado",
 
 answer = CarouselAnswer.new(message: "Here are our activities! I wish i could come along but im a bot.. :(")
 answer.save!
-info_intent = Intent.new(q_string: "Activities", q_key: 'activities')
+info_intent = Intent.new(q_string: "Cool Activities 🏄‍️", q_key: 'activities')
 info_intent.parent_intent = top
 info_intent.answer = answer
 info_intent.save!
@@ -264,7 +264,7 @@ answer = ActivitiesCarouselAnswer.new(name: "Sintra Tram",
 
 answer = SimpleAnswer.new(message: "Select what u want to search for")
 answer.save!
-location_intent = Intent.new(q_string: "Near by places", q_key: 'places')
+location_intent = Intent.new(q_string: "Nearby places 📍", q_key: 'places')
 location_intent.parent_intent = top
 location_intent.answer = answer
 location_intent.save!
