@@ -105,13 +105,12 @@ top.save!
 
 # Where to eat
 
-answer = SimpleAnswer.new(message: "Would you like to know the services we have for you?")
+answer = ComplexAnswer.new(message: "Would you like to know the services we have for you?")
 answer.save!
 services_intent = Intent.new(q_string: "Services", q_key: 'services', tag: 'services information')
 services_intent.parent_intent = top
 services_intent.answer = answer
 services_intent.save!
-
 
     # answer = ComplexAnswer.new(message: "Here is the full list of available services.")
     # answer.save!
@@ -120,9 +119,30 @@ services_intent.save!
     # intent.answer = answer
     # intent.save!
 
-    answer = SimpleAnswer.new(message: "Breakfast included in the rate, from 7AM to 11AM.\nCheck-In: from 1PM.\nCheck-Out: until 11AM.\n24 hour working reception.")
+    answer = SimpleAnswer.new(message: "from 1PM.")
     answer.save!
-    intent = Intent.new(q_string: "Check In Information", q_key: 'check_in')
+    intent = Intent.new(q_string: "Check In", q_key: 'check_in')
+    intent.parent_intent = services_intent
+    intent.answer = answer
+    intent.save!
+
+    answer = SimpleAnswer.new(message: "until 11AM.")
+    answer.save!
+    intent = Intent.new(q_string: "Check Out", q_key: "check_out")
+    intent.parent_intent = services_intent
+    intent.answer = answer
+    intent.save!
+
+    answer = SimpleAnswer.new(message: "24 hour working reception.")
+    answer.save!
+    intent = Intent.new(q_string: "Reseption", q_key: "reseption")
+    intent.parent_intent = services_intent
+    intent.answer = answer
+    intent.save!
+
+    answer = SimpleAnswer.new(message: "Breakfast included in the rate, from 7AM to 11AM.")
+    answer.save!
+    intent = Intent.new(q_string: "Breakfast", q_key: 'breakfast')
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
@@ -213,7 +233,7 @@ answer = ActivitiesCarouselAnswer.new(name: "Sintra Tram",
 
     )
   answer.save!
-  intent = Intent.new(q_string: "tram", q_key: "local_tram")
+  intent = Intent.new(q_string: "Tram", q_key: "local_tram")
   intent.parent_intent = info_intent
   intent.answer = answer
   intent.save!
@@ -228,6 +248,7 @@ answer = ActivitiesCarouselAnswer.new(name: "Sintra Tram",
     url:  "http://www.sintrasurf.com/surf-lesson-packs-prices/"
     )
   answer.save!
+
   intent = Intent.new(q_string: "Surfing", q_key: "surfing")
   intent.parent_intent = info_intent
   intent.answer = answer
@@ -262,12 +283,12 @@ location_intent.parent_intent = top
 location_intent.answer = answer
 location_intent.save!
 
-search_keys = ['museum', 'atm']
+search_keys = ['museum', 'atm', 'grocery_or_supermarket', 'cafe', 'car_rental', 'restaurant']
 
 search_keys.each do |key|
   answer = GoogleApiCarouselAnswer.new(name: key, message: "Select to get details!")
   answer.save!
-  google_intent = Intent.new(q_string: key.capitalize, q_key: "google_api_#{key}")
+  google_intent = Intent.new(q_string: key.gsub('_', ' ').capitalize, q_key: "google_api_#{key}")
   google_intent.parent_intent = location_intent
   google_intent.answer = answer
   google_intent.save!
