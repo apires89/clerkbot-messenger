@@ -1,5 +1,5 @@
 class ComplexAnswer < Answer
-  #before_save :change_defaults
+  before_save :change_defaults
 
   private
 
@@ -23,9 +23,9 @@ class ComplexAnswer < Answer
   end
 
 
-  # def change_defaults
-  #   self.quik_replies = false
-  # end
+  def change_defaults
+    self.quik_replies = false
+  end
 
   def complex_map
     message = ""

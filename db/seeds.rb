@@ -108,13 +108,6 @@ top.save!
 
 # Where to eat
 
-answer = SimpleAnswer.new(message: "Would you like to know the services we have for you?")
-answer.save!
-services_intent = Intent.new(q_string: "Services", q_key: 'services')
-services_intent.parent_intent = top
-services_intent.answer = answer
-services_intent.save!
-
 answer = ComplexAnswer.new(message: "Would you like to know the services we have for you?")
 answer.save!
 services_intent = Intent.new(q_string: "Services", q_key: 'services')
@@ -129,14 +122,14 @@ services_intent.save!
     # intent.answer = answer
     # intent.save!
 
-    answer = SimpleAnswer.new(message: "Check-In: from 1PM.")
+    answer = SimpleAnswer.new(message: "from 1PM.")
     answer.save!
     intent = Intent.new(q_string: "Check In", q_key: 'check_in')
     intent.parent_intent = services_intent
     intent.answer = answer
     intent.save!
 
-    answer = SimpleAnswer.new(message: "Check-Out: until 11AM.")
+    answer = SimpleAnswer.new(message: "until 11AM.")
     answer.save!
     intent = Intent.new(q_string: "Check Out", q_key: "check_out")
     intent.parent_intent = services_intent
@@ -234,7 +227,7 @@ answer = CarouselItemAnswer.new(name: "Take the tram to the beach",
 
     )
   answer.save!
-  intent = Intent.new(q_string: "tram", q_key: "local_tram")
+  intent = Intent.new(q_string: "Tram", q_key: "local_tram")
   intent.parent_intent = info_intent
   intent.answer = answer
   intent.save!
@@ -245,7 +238,7 @@ answer = CarouselItemAnswer.new(name: "Take the tram to the beach",
     subtitle: "Quality beach breaks at Praia Grande",
     )
   answer.save!
-  intent = Intent.new(q_string: "Biking tour ", q_key: "biking_tour")
+  intent = Intent.new(q_string: "Surf ", q_key: "surf")
   intent.parent_intent = info_intent
   intent.answer = answer
   intent.save!
@@ -273,12 +266,12 @@ location_intent.parent_intent = top
 location_intent.answer = answer
 location_intent.save!
 
-search_keys = ['museum', 'atm']
+search_keys = ['museum', 'atm', 'grocery_or_supermarket', 'cafe', 'car_rental', 'restaurant']
 
 search_keys.each do |key|
   answer = GoogleApiCarouselAnswer.new(name: key, message: "Select to get details!")
   answer.save!
-  google_intent = Intent.new(q_string: key.capitalize, q_key: "google_api_#{key}")
+  google_intent = Intent.new(q_string: key.gsub('_', ' ').capitalize, q_key: "google_api_#{key}")
   google_intent.parent_intent = location_intent
   google_intent.answer = answer
   google_intent.save!
