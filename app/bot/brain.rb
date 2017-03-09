@@ -1,5 +1,6 @@
 require "facebook/messenger"
 require 'json'
+require_relative "../../lib/facebook/client"
 
 
 
