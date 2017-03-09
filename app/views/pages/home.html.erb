@@ -6,7 +6,7 @@
         <% render_intent(i, form) %>
     <% end %>
   <% else %>
-    <% if intent.is_pipeline == false %>
+    <% if intent.is_pipeline == false && intent.in_form %>
       <%= render "answer_form", answer: intent.answer , form: form %>
       <% intent.child_intents.each do |i| %>
         <% render_intent(i, form) %>
@@ -34,7 +34,7 @@
     <% end %>
 
     <% if @root_intent.answer.message %>
-      <%= f.input :message, as: :text %>
+      <%= f.input :message, as: :text, input_html: {rows: 6}%>
     <% end %>
 
     <% if @root_intent.answer.location %>
@@ -63,6 +63,7 @@
 
     <% render_intent(@root_intent, f) %>
 
-    <%= f.submit 'Save' %>
+    <%= f.submit 'Save changes', class: "btn btn-primary" %>
   <% end %>
 </div>
+<div class="filler"></div>
