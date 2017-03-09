@@ -166,7 +166,7 @@ services_intent.save!
 
 answer = CarouselAnswer.new(message: "We have a restaurant in the hostel! Its called Caldo Entornado 😋")
 answer.save!
-eat_intent = Intent.new(q_string: "Book a table 🍴", q_key: 'restaurants')
+eat_intent = Intent.new(q_string: "Hostel restaurant 🍴", q_key: 'restaurants')
 eat_intent.parent_intent = top
 eat_intent.answer = answer
 eat_intent.save!
@@ -266,7 +266,7 @@ answer = ActivitiesCarouselAnswer.new(name: "Sintra Tram",
 
 answer = SimpleAnswer.new(message: "What sort of place are looking for?")
 answer.save!
-location_intent = Intent.new(q_string: "Nearby places 📍", q_key: 'places')
+location_intent = Intent.new(q_string: "Nearby places 📍", q_key: 'places', in_form: false)
 location_intent.parent_intent = top
 location_intent.answer = answer
 location_intent.save!
@@ -276,7 +276,7 @@ search_keys = ['museum', 'atm', 'grocery_or_supermarket', 'cafe', 'car_rental', 
 search_keys.each do |key|
   answer = GoogleApiCarouselAnswer.new(name: key, message: "Here are the closest #{key.gsub('_', ' ').split(' ')[-1].capitalize}s I could find! (Powered by GoogleMaps™️)")
   answer.save!
-  google_intent = Intent.new(q_string: "Search for " + key.gsub('_', ' ').capitalize + "s", q_key: "google_api_#{key}")
+  google_intent = Intent.new(q_string: "Search for " + key.gsub('_', ' ').capitalize + "s", q_key: "google_api_#{key}" , in_form: false)
   google_intent.parent_intent = location_intent
   google_intent.answer = answer
   google_intent.save!

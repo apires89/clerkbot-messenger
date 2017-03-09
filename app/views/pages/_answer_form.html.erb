@@ -14,7 +14,7 @@
     <% end %>
 
     <% if answer.message %>
-      <%= f.input :message, as: :text %>
+      <%= f.input :message, as: :text, input_html: {rows: 6} %>
     <% end %>
 
     <% if answer.location %>
@@ -34,7 +34,7 @@
     <% end %>
 
     <% if answer.description %>
-      <%= f.input :description %>
+      <%= f.input :description, as: :text, input_html: {rows: 6} %>
     <% end %>
 
     <% if answer.duration %>
