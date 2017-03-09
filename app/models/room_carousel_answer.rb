@@ -23,7 +23,7 @@ class RoomCarouselAnswer < Answer
                 type: "web_url",
                 title: "Select and check out",
                 url: "https://bananahostels.com/booking-engine/moon-hill-hostel/#{format_dates(user.booking.checkin)}/#{format_dates(user.booking.checkout)}/#{if room.name == "Dorm" || room.name == "Family Room"
-                    "dorms"
+                    "dorm"
                   else
                     "private"
                   end}/",
