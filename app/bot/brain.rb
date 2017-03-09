@@ -3,6 +3,7 @@ require 'json'
 
 
 
+
 class Brain
   include Facebook::Messenger
 
