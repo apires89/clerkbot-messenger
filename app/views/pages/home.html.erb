@@ -1,4 +1,4 @@
-<h1>Update bot</h1>
+
 
 <% def render_intent(intent, form) %>
   <% if intent.q_key == "root" %>
@@ -15,9 +15,12 @@
   <% end %>
 <% end %>
 
-<div class="answer_wrapper">
+
+<div class="form_wrapper">
+  <%= image_tag "logo-colored.png", class: "banner" %>
+  <h1>Update bot</h1>
   <h3><%= @root_intent.q_string %></h3>
-  <%= simple_form_for @root_intent.answer, url: page_path(@root_intent.answer), method: :post do |f| %>
+  <%= simple_form_for @root_intent.answer, url: page_path(@root_intent.answer), method: :patch do |f| %>
     <% if @root_intent.answer.name %>
       <%= f.input :name %>
     <% end %>
@@ -59,5 +62,7 @@
     <% end %>
 
     <% render_intent(@root_intent, f) %>
+
+    <%= f.submit 'Save' %>
   <% end %>
 </div>

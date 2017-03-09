@@ -1,6 +1,6 @@
 <div class="answer_wrapper">
   <h3><%= answer.intent.q_string %></h3>
-  <%= form.simple_fields_for answer , url: page_path(answer), method: :post do |f| %>
+  <%= form.simple_fields_for answer.id.to_s.to_sym, answer do |f| %>
     <% if answer.name %>
       <%= f.input :name %>
     <% end %>
